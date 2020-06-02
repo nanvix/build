@@ -55,6 +55,9 @@ export CFLAGS += -mos=bare -march=k1b -mboard=developer
 export CFLAGS += -D __HAS_HW_DIVISION=1 -D__HAS_HW_MULTIPLICATION=1
 export CFLAGS += -D __GLIBC_BUG__
 
+# Linker Options
+export LDFLAGS := -Wl,--allow-multiple-definition
+
 #===============================================================================
 
 # Builds everything.

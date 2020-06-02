@@ -57,6 +57,9 @@ export CFLAGS += -D __HAS_HW_DIVISION=0 -D__HAS_HW_MULTIPLICATION=0
 # Timeout Variable
 export TIMEOUT ?= 5
 
+# Linker Options
+export LDFLAGS := -nostdlib -nostdinc -ffreestanding
+
 # Suffix for Objects
 export OBJ_SUFFIX := optimsoc
 

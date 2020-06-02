@@ -57,6 +57,11 @@ export CFLAGS += -nostdlib -nostdinc -ffreestanding
 export CFLAGS += -Wstack-usage=4096
 export CFLAGS += -D __HAS_HW_DIVISION=1 -D__HAS_HW_MULTIPLICATION=1
 
+# Linker Options
+export LDFLAGS := -march=rv32imac -mabi=ilp32 -mcmodel=medany
+export LDFLAGS += -Wl,--nmagic -Wl,--gc-sections
+export LDFLAGS += -nostdlib -nostdinc -ffreestanding
+
 # Suffix for Objects
 export OBJ_SUFFIX := qemu-riscv32
 
