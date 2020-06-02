@@ -53,6 +53,7 @@ export TIMEOUT ?= 5
 
 # Compiler Options
 export CFLAGS += -nostdlib -nostdinc -ffreestanding
+export CFLAGS += -pedantic-errors
 export CFLAGS += -Wstack-usage=4096
 export CFLAGS += -D __HAS_HW_DIVISION=1 -D__HAS_HW_MULTIPLICATION=1
 
@@ -63,15 +64,7 @@ export LDFLAGS := -nostdlib -nostdinc -ffreestanding
 export OBJ_SUFFIX := qemu-x86
 
 #===============================================================================
+# Libraries
+#===============================================================================
 
-# Builds everything.
-all-target:
-	@$(MAKE) -C $(SRCDIR) all
-
-# Cleans object files.
-clean-target:
-	@$(MAKE) -C $(SRCDIR) clean
-
-# Cleans everything.
-distclean-target:
-	@$(MAKE) -C $(SRCDIR) distclean
+export THEIR_LIBS := -lgcc
