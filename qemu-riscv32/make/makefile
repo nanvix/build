@@ -53,8 +53,11 @@ export TIMEOUT ?= 60
 
 # Compiler Options
 export CFLAGS += -march=rv32imac -mabi=ilp32 -mcmodel=medany
+export CFLAGS += -ffunction-sections -fdata-sections
 export CFLAGS += -nostdlib -nostdinc -ffreestanding
+export CFLAGS += -pedantic-errors
 export CFLAGS += -Wstack-usage=4096
+export CFLAGS += -Wno-error=type-limits
 export CFLAGS += -D __HAS_HW_DIVISION=1 -D__HAS_HW_MULTIPLICATION=1
 
 # Linker Options
@@ -66,15 +69,7 @@ export LDFLAGS += -nostdlib -nostdinc -ffreestanding
 export OBJ_SUFFIX := qemu-riscv32
 
 #===============================================================================
+# Libraries
+#===============================================================================
 
-# Builds everything.
-all-target:
-	@$(MAKE) -C $(SRCDIR) all
-
-# Cleans object files.
-clean-target:
-	@$(MAKE) -C $(SRCDIR) clean
-
-# Cleans everything.
-distclean-target:
-	@$(MAKE) -C $(SRCDIR) distclean
+export THEIR_LIBS := -lgcc
