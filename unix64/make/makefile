@@ -1,5 +1,4 @@
 #
-#
 # MIT License
 #
 # Copyright(c) 2011-2020 The Maintainers of Nanvix
@@ -53,7 +52,6 @@ export AR := ar
 export TIMEOUT ?= 60
 
 # Compiler Options
-export CFLAGS := -D__unix64__
 export CFLAGS += -Wstack-usage=4096
 export CFLAGS += -D __HAS_HW_DIVISION=1 -D__HAS_HW_MULTIPLICATION=1
 

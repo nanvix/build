@@ -51,7 +51,6 @@ export AR := $(TOOLCHAIN_DIR)/bin/k1-ar
 export TIMEOUT ?= 120
 
 # Compiler Options
-export CFLAGS := -D__mppa256__
 export CFLAGS += -mos=bare -march=k1b -mboard=developer
 export CFLAGS += -D __HAS_HW_DIVISION=1 -D__HAS_HW_MULTIPLICATION=1
 export CFLAGS += -D __GLIBC_BUG__
@@ -78,12 +77,12 @@ all-k1bio:
 # Cleans object files.
 clean-target: clean-k1bdp clean-k1bio
 
-# Builds everything for node cluster variant.
+# Cleans object files for node cluster variant.
 clean-k1bdp:
 	@$(MAKE) -C $(SRCDIR) clean \
 		OBJ_SUFFIX=k1bdp
 
-# Builds everything for ioddr cluster variant.
+# Cleans object files for ioddr cluster variant.
 clean-k1bio:
 	@$(MAKE) -C $(SRCDIR) clean \
 		OBJ_SUFFIX=k1bio

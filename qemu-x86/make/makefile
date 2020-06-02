@@ -52,7 +52,6 @@ export AR := $(TOOLCHAIN_DIR)/i486-elf-ar
 export TIMEOUT ?= 5
 
 # Compiler Options
-export CFLAGS := -D__qemu_x86__
 export CFLAGS += -nostdlib -nostdinc -ffreestanding
 export CFLAGS += -Wstack-usage=4096
 export CFLAGS += -D __HAS_HW_DIVISION=1 -D__HAS_HW_MULTIPLICATION=1

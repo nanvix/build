@@ -50,7 +50,6 @@ export LD := $(TOOLCHAIN_DIR)/or1k-elf-ld
 export AR := $(TOOLCHAIN_DIR)/or1k-elf-ar
 
 # Compiler Options
-export CFLAGS := -D__optimsoc__
 export CFLAGS += -nostdlib -nostdinc -ffreestanding
 export CFLAGS += -Wstack-usage=4096
 export CFLAGS += -D __HAS_HW_DIVISION=0 -D__HAS_HW_MULTIPLICATION=0

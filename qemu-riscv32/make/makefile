@@ -52,7 +52,6 @@ export AR := $(TOOLCHAIN_DIR)/riscv32-elf-ar
 export TIMEOUT ?= 60
 
 # Compiler Options
-export CFLAGS := -D__qemu_riscv32__
 export CFLAGS += -march=rv32imac -mabi=ilp32 -mcmodel=medany
 export CFLAGS += -nostdlib -nostdinc -ffreestanding
 export CFLAGS += -Wstack-usage=4096

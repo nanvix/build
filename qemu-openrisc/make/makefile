@@ -53,7 +53,6 @@ export AR := $(TOOLCHAIN_DIR)/or1k-elf-ar
 export TIMEOUT ?= 10
 
 # Compiler Options
-export CFLAGS := -D__qemu_openrisc__
 export CFLAGS += -nostdlib -nostdinc -ffreestanding
 export CFLAGS += -Wstack-usage=4096
 export CFLAGS += -Wno-missing-profile
