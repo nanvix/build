@@ -47,6 +47,9 @@ export CC := $(TOOLCHAIN_DIR)/bin/k1-gcc
 export LD := $(TOOLCHAIN_DIR)/bin/k1-gcc
 export AR := $(TOOLCHAIN_DIR)/bin/k1-ar
 
+# Timeout Variable
+export TIMEOUT ?= 120
+
 # Compiler Options
 export CFLAGS := -D__mppa256__
 export CFLAGS += -mos=bare -march=k1b -mboard=developer

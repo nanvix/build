@@ -49,6 +49,9 @@ export CC := gcc
 export LD := ld
 export AR := ar
 
+# Timeout Variable
+export TIMEOUT ?= 60
+
 # Compiler Options
 export CFLAGS := -D__unix64__
 export CFLAGS += -Wstack-usage=4096

@@ -49,6 +49,9 @@ export CC := $(TOOLCHAIN_DIR)/or1k-elf-gcc
 export LD := $(TOOLCHAIN_DIR)/or1k-elf-ld
 export AR := $(TOOLCHAIN_DIR)/or1k-elf-ar
 
+# Timeout Variable
+export TIMEOUT ?= 10
+
 # Compiler Options
 export CFLAGS := -D__qemu_openrisc__
 export CFLAGS += -nostdlib -nostdinc -ffreestanding
