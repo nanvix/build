@@ -51,7 +51,9 @@ export AR := $(TOOLCHAIN_DIR)/or1k-elf-ar
 
 # Compiler Options
 export CFLAGS += -nostdlib -nostdinc -ffreestanding
+export CFLAGS += -pedantic-errors
 export CFLAGS += -Wstack-usage=4096
+export CFLAGS += -Wno-type-limits
 export CFLAGS += -D __HAS_HW_DIVISION=0 -D__HAS_HW_MULTIPLICATION=0
 
 # Timeout Variable
@@ -64,15 +66,7 @@ export LDFLAGS := -nostdlib -nostdinc -ffreestanding
 export OBJ_SUFFIX := optimsoc
 
 #===============================================================================
+# Libraries
+#===============================================================================
 
-# Builds everything.
-all-target:
-	@$(MAKE) -C $(SRCDIR) all
-
-# Cleans object files.
-clean-target:
-	@$(MAKE) -C $(SRCDIR) clean
-
-# Cleans everything.
-distclean-target:
-	@$(MAKE) -C $(SRCDIR) distclean
+export THEIR_LIBS := -lgcc
