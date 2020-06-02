@@ -23,6 +23,21 @@
 #
 
 #===============================================================================
+# Target Configuration
+#===============================================================================
+
+export TARGET    ?= qemu-openrisc
+export PROCESSOR := or1k-processor
+export CLUSTER   := or1k-cluster
+export CORE      := or1k
+
+export CFLAGS := -D __qemu_openrisc__ # Target
+export CFLAGS += -D __openrisc__      # Processor
+export CFLAGS += -D __or1k_cluster__  # Cluster
+export CFLAGS += -D __or1k__          # Core
+export CFLAGS += -D __or1200__        # Core Variant
+
+#===============================================================================
 # Toolchain Configuration
 #===============================================================================
 

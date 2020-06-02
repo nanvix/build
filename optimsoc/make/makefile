@@ -23,6 +23,21 @@
 #
 
 #===============================================================================
+# Target Configuration
+#===============================================================================
+
+export TARGET    ?= optimsoc
+export PROCESSOR := optimsoc4
+export CLUSTER   := or1k-cluster
+export CORE      := mor1kx
+
+export CFLAGS := -D __optimsoc__         # Target
+export CFLAGS += -D __optimsoc4__        # Processor
+export CFLAGS += -D __optimsoc_cluster__ # Cluster
+export CFLAGS += -D __or1k__             # Core
+export CFLAGS += -D __mor1kx__           # Core Variant
+
+#===============================================================================
 # Toolchain Configuration
 #===============================================================================
 

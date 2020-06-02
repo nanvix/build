@@ -23,6 +23,20 @@
 #
 
 #===============================================================================
+# Target Configuration
+#===============================================================================
+
+export TARGET    ?= qemu-riscv32
+export PROCESSOR := riscv32
+export CLUSTER   := riscv32-cluster
+export CORE      := rv32gc
+
+export CFLAGS := -D __qemu_riscv32__    # Target
+export CFLAGS += -D __riscv32__         # Processor
+export CFLAGS += -D __riscv32_cluster__ # Cluster
+export CFLAGS += -D __rv32gc__          # Core
+
+#===============================================================================
 # Toolchain Configuration
 #===============================================================================
 

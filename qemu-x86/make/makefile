@@ -23,6 +23,20 @@
 #
 
 #===============================================================================
+# Target Configuration
+#===============================================================================
+
+export TARGET    ?= qemu-x86
+export PROCESSOR := x86
+export CLUSTER   := x86-cluster
+export CORE      := i486
+
+export CFLAGS := -D __qemu_x86__    # Target
+export CFLAGS += -D __x86__         # Processor
+export CFLAGS += -D __x86_cluster__ # Cluster
+export CFLAGS += -D __i486__        # Core
+
+#===============================================================================
 # Toolchain Configuration
 #===============================================================================
 

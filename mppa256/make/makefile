@@ -23,6 +23,19 @@
 #
 
 #===============================================================================
+# Target Configuration
+#===============================================================================
+
+export TARGET    ?= mppa256
+export PROCESSOR := bostan
+export CLUSTER   := k1b-cluster
+export CORE      := k1b
+
+export CFLAGS := -D __mppa256__ # Target
+export CFLAGS += -D __bostan__  # Processor
+export CFLAGS += -D __k1b__     # Cluster and Core
+
+#===============================================================================
 # Toolchain Configuration
 #===============================================================================
 

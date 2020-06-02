@@ -24,6 +24,20 @@
 #
 
 #===============================================================================
+# Target Configuration
+#===============================================================================
+
+export TARGET    ?= unix64
+export PROCESSOR := linux64
+export CLUSTER   := linux64-cluster
+export CORE      := linux64-core
+
+export CFLAGS := -D __unix64__            # Target
+export CFLAGS += -D __linux64_processor__ # Processor
+export CFLAGS += -D __linux64_cluster__   # Cluster
+export CFLAGS += -D __linux64_core__      # Core
+
+#===============================================================================
 # Toolchain Configuration
 #===============================================================================
 
