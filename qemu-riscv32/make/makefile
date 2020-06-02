@@ -45,6 +45,7 @@ export TOOLCHAIN_DIR ?= $(TOOLSDIR)/toolchain/riscv32/bin
 
 # Toolchain
 export CC := $(TOOLCHAIN_DIR)/riscv32-elf-gcc
+export LD := $(TOOLCHAIN_DIR)/riscv32-elf-ld
 export AR := $(TOOLCHAIN_DIR)/riscv32-elf-ar
 
 # Compiler Options

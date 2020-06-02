@@ -44,6 +44,7 @@ export TOOLCHAIN_DIR ?= /usr/local/k1tools
 
 # Toolchain
 export CC := $(TOOLCHAIN_DIR)/bin/k1-gcc
+export LD := $(TOOLCHAIN_DIR)/bin/k1-gcc
 export AR := $(TOOLCHAIN_DIR)/bin/k1-ar
 
 # Compiler Options

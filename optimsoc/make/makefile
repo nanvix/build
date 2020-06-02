@@ -45,8 +45,9 @@ export CFLAGS += -D __mor1kx__           # Core Variant
 export TOOLCHAIN_DIR ?= $(TOOLSDIR)/toolchain/or1k/bin/
 
 # Toolchain
-export CC = $(TOOLCHAIN_DIR)/or1k-elf-gcc
-export AR = $(TOOLCHAIN_DIR)/or1k-elf-ar
+export CC := $(TOOLCHAIN_DIR)/or1k-elf-gcc
+export LD := $(TOOLCHAIN_DIR)/or1k-elf-ld
+export AR := $(TOOLCHAIN_DIR)/or1k-elf-ar
 
 # Compiler Options
 export CFLAGS := -D__optimsoc__

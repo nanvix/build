@@ -45,8 +45,9 @@ export CFLAGS += -D __linux64_core__      # Core
 export TOOLCHAIN_DIR ?= $(TOOLSDIR)/toolchain/unix/bin
 
 # Toolchain
-export CC = gcc
-export AR = ar
+export CC := gcc
+export LD := ld
+export AR := ar
 
 # Compiler Options
 export CFLAGS := -D__unix64__

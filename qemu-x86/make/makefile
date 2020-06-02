@@ -45,6 +45,7 @@ export TOOLCHAIN_DIR ?= $(TOOLSDIR)/toolchain/i486/bin
 
 # Toolchain
 export CC := $(TOOLCHAIN_DIR)/i486-elf-gcc
+export LD := $(TOOLCHAIN_DIR)/i486-elf-ld
 export AR := $(TOOLCHAIN_DIR)/i486-elf-ar
 
 # Compiler Options
