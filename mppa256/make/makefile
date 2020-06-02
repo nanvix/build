@@ -59,48 +59,7 @@ export CFLAGS += -D __GLIBC_BUG__
 export LDFLAGS := -Wl,--allow-multiple-definition
 
 #===============================================================================
+# Libraries
+#===============================================================================
 
-# Builds everything.
-all-target: all-k1bio all-k1bdp
-
-# Builds everything for node cluster variant.
-all-k1bdp:
-	@$(MAKE) -C $(SRCDIR) all             \
-		CFLAGS="$(CFLAGS) -mcluster=node" \
-		KLIB=barelib-k1bdp.a              \
-		OBJ_SUFFIX=k1bdp
-
-# Builds everything for ioddr cluster variant.
-all-k1bio:
-	@$(MAKE) -C $(SRCDIR) all              \
-		CFLAGS="$(CFLAGS) -mcluster=ioddr" \
-		KLIB=barelib-k1bio.a               \
-		OBJ_SUFFIX=k1bio
-
-# Cleans object files.
-clean-target: clean-k1bdp clean-k1bio
-
-# Cleans object files for node cluster variant.
-clean-k1bdp:
-	@$(MAKE) -C $(SRCDIR) clean \
-		OBJ_SUFFIX=k1bdp
-
-# Cleans object files for ioddr cluster variant.
-clean-k1bio:
-	@$(MAKE) -C $(SRCDIR) clean \
-		OBJ_SUFFIX=k1bio
-
-# Cleans everything.
-distclean-target: distclean-k1bdp distclean-k1bio
-
-# Cleans everything for node cluster variant.
-distclean-k1bdp: clean-k1bdp
-	@$(MAKE) -C $(SRCDIR) distclean \
-		KLIB=barelib-k1bdp.a        \
-		OBJ_SUFFIX=k1bdp
-
-# Cleans everything for ioddr cluster variant.
-distclean-k1bio: clean-k1bio
-	@$(MAKE) -C $(SRCDIR) distclean \
-		KLIB=barelib-k1bio.a        \
-		OBJ_SUFFIX=k1bio
+export THEIR_LIBS := -lvbsp -mhypervisor
