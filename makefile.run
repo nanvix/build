@@ -22,6 +22,8 @@
 # SOFTWARE.
 #
 
+ifeq ($(DOCKER),no)
+
 # Runs Unit Tests in all clusters.
 run:
 	bash $(TOOLSDIR)/nanvix-run.sh $(IMAGE) $(BINDIR) $(TARGET) all --no-debug
@@ -33,3 +35,16 @@ test:
 # Runs Unit Tests in all clusters in debug mode.
 debug:
 	bash $(TOOLSDIR)/nanvix-run.sh $(IMAGE) $(BINDIR) $(TARGET) all --debug
+
+# Run Docker containers.
+else
+
+# Runs Unit tests in all clusters.
+run:
+	cd $(ROOTDIR)/docker && docker-compose -f run.yml up $(TARGET)
+
+# Runs Unit Tests in all clusters in debug mode.
+debug:
+	cd $(ROOTDIR)/docker && docker-compose -f debug.yml up $(TARGET)
+
+endif
