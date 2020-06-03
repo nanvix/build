@@ -50,7 +50,7 @@ export LD := $(TOOLCHAIN_DIR)/or1k-elf-ld
 export AR := $(TOOLCHAIN_DIR)/or1k-elf-ar
 
 # Timeout Variable
-export TIMEOUT ?= 10
+export TIMEOUT ?= 120
 
 # Compiler Options
 export CFLAGS += -nostdlib -nostdinc -ffreestanding
@@ -62,6 +62,7 @@ export CFLAGS += -D __HAS_HW_DIVISION=1 -D__HAS_HW_MULTIPLICATION=1
 
 # Linker Options
 export LDFLAGS := -nostdlib -nostdinc -ffreestanding
+export LDFLAGS += -Wl,--allow-multiple-definition
 
 # Suffix for Objects
 export OBJ_SUFFIX := qemu-openrisc
