@@ -90,4 +90,3 @@ distclean-k1bio: clean-k1bio
 		LIBHAL=libhal-k1bio.a       \
 		OBJ_SUFFIX=k1bio            \
 		EXEC=test-driver.k1bio
-

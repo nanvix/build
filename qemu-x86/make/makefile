@@ -68,3 +68,4 @@ export OBJ_SUFFIX := qemu-x86
 #===============================================================================
 
 export THEIR_LIBS := -lgcc
+export LIBLWIP := liblwip-qemu-x86.a

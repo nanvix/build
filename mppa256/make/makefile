@@ -63,3 +63,4 @@ export LDFLAGS := -Wl,--allow-multiple-definition
 #===============================================================================
 
 export THEIR_LIBS := -lvbsp -mhypervisor
+export LIBLWIP :=

@@ -73,3 +73,4 @@ export OBJ_SUFFIX := qemu-riscv32
 #===============================================================================
 
 export THEIR_LIBS := -lgcc
+export LIBLWIP :=
