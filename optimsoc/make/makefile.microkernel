@@ -1,7 +1,7 @@
 #
 # MIT License
 #
-# Copyright(c) 2018 Pedro Henrique Penna <pedrohenriquepenna@gmail.com>
+# Copyright(c) 2011-2020 The Maintainers of Nanvix
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,29 +22,18 @@
 # SOFTWARE.
 #
 
-ifeq ($(DOCKER),no)
+include $(MAKEDIR)/makefile
 
-# Runs Unit Tests in all clusters.
-run:
-	bash $(TOOLSDIR)/nanvix-run.sh $(IMAGE) $(BINDIR) $(TARGET) all --no-debug
+#===============================================================================
 
-# Runs Unit Tests in all clusters.
-test:
-	bash $(TOOLSDIR)/nanvix-run.sh $(IMAGE) $(BINDIR) $(TARGET) all --no-debug $(TIMEOUT)
+# Builds everything.
+all-target: make-dirs
+	@$(MAKE) -C $(SRCDIR) all
 
-# Runs Unit Tests in all clusters in debug mode.
-debug:
-	bash $(TOOLSDIR)/nanvix-run.sh $(IMAGE) $(BINDIR) $(TARGET) all --debug
+# Cleans object files.
+clean-target:
+	@$(MAKE) -C $(SRCDIR) clean
 
-# Run Docker containers.
-else
-
-# Runs Unit tests in all clusters.
-run:
-	cd $(ROOTDIR)/docker && docker-compose -f run.yml up $(TARGET)
-
-# Runs Unit Tests in all clusters in debug mode.
-debug:
-	cd $(ROOTDIR)/docker && docker-compose -f debug.yml up $(TARGET)
-
-endif
+# Cleans everything.
+distclean-target:
+	@$(MAKE) -C $(SRCDIR) distclean

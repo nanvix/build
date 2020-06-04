@@ -70,3 +70,4 @@ export OBJ_SUFFIX := optimsoc
 #===============================================================================
 
 export THEIR_LIBS := -lgcc
+export LIBLWIP :=

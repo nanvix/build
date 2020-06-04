@@ -22,45 +22,38 @@
 # SOFTWARE.
 #
 
-#===============================================================================
-# Target Configuration
-#===============================================================================
+# Builds contrib.
+contrib: contrib-hal
 
-export TARGET    ?= mppa256
-export PROCESSOR := bostan
-export CLUSTER   := k1b-cluster
-export CORE      := k1b
+# Builds contrib headers.
+contrib-headers: contrib-headers-hal
 
-export CFLAGS := -D __mppa256__ # Target
-export CFLAGS += -D __bostan__  # Processor
-export CFLAGS += -D __k1b__     # Cluster and Core
+# Cleans contrib.
+contrib-uninstall: contrib-uninstall-hal
 
-#===============================================================================
-# Toolchain Configuration
-#===============================================================================
-
-# Toolchain Directory
-export TOOLCHAIN_DIR ?= /usr/local/k1tools
-
-# Toolchain
-export CC := $(TOOLCHAIN_DIR)/bin/k1-gcc
-export LD := $(TOOLCHAIN_DIR)/bin/k1-gcc
-export AR := $(TOOLCHAIN_DIR)/bin/k1-ar
-
-# Timeout Variable
-export TIMEOUT ?= 120
-
-# Compiler Options
-export CFLAGS += -mos=bare -march=k1b -mboard=developer
-export CFLAGS += -D __HAS_HW_DIVISION=1 -D__HAS_HW_MULTIPLICATION=1
-export CFLAGS += -D __GLIBC_BUG__
-
-# Linker Options
-export LDFLAGS := -Wl,--allow-multiple-definition
+# Cleans contrib headers.
+contrib-uninstall-headers: contrib-uninstall-headers-hal
 
 #===============================================================================
-# Libraries
+# HAL
 #===============================================================================
 
-export THEIR_LIBS := -lvbsp -mhypervisor
-export LIBLWIP :=
+# Builds HAL.
+contrib-hal: make-dirs
+	$(MAKE) -C $(CONTRIBDIR)/hal contrib RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/hal install PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+
+# Builds HAL headers.
+contrib-headers-hal: make-dirs
+	$(MAKE) -C $(CONTRIBDIR)/hal contrib-headers RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/hal install-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+
+# Cleans HAL.
+contrib-uninstall-hal:
+	$(MAKE) -C $(CONTRIBDIR)/hal uninstall PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/hal contrib-uninstall RELEASE=$(RELEASE)
+
+# Cleans HAL headers.
+contrib-uninstall-headers-hal:
+	$(MAKE) -C $(CONTRIBDIR)/hal uninstall-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/hal contrib-uninstall-headers RELEASE=$(RELEASE)

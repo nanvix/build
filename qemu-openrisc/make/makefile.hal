@@ -47,4 +47,3 @@ clean-target:
 # Cleans everything.
 distclean-target:
 	@$(MAKE) -C $(SRCDIR) distclean
-
