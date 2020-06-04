@@ -44,11 +44,19 @@ install: | make-dirs all-target install-headers
 	@cp -f $(LIBDIR)/libhal*.a $(PREFIX)/lib 2> /dev/null || :
 	@cp -f $(LIBDIR)/libkernel*.a $(LIBDIR)/liblwip*.a $(PREFIX)/lib 2>/dev/null || :
 	@cp -f $(LIBDIR)/libnanvix*.a $(PREFIX)/lib 2>/dev/null || :
+	@cp -f $(LIBDIR)/libc*.a $(PREFIX)/lib 2>/dev/null || :
+	@cp -f $(LIBDIR)/libruntime*.a $(PREFIX)/lib 2>/dev/null || :
+	@cp -f $(BINDIR)/nanvix-zombie.* $(PREFIX)/bin 2>/dev/null || :
+	@cp -f $(BINDIR)/nanvix-spawn*.* $(PREFIX)/bin 2>/dev/null || :
 	@echo [CP] $(PREFIX)/lib/barelib*.a
 	@echo [CP] $(PREFIX)/lib/libhal*.a
 	@echo [CP] $(PREFIX)/lib/libkernel*.a
 	@echo [CP] $(PREFIX)/lib/liblwip*.a
-	@echo [RM] $(PREFIX)/lib/libnanvix*.a
+	@echo [CP] $(PREFIX)/lib/libnanvix*.a
+	@echo [CP] $(PREFIX)/lib/libc*.a
+	@echo [CP] $(PREFIX)/lib/libruntime*.a
+	@echo [CP] $(BINDIR)/nanvix-zombie.*
+	@echo [CP] $(BINDIR)/nanvix-spawn*.*
 	@echo "==============================================================================="
 	@echo "Bare Libraries for Nanvix Successfully Installed"
 	@echo "==============================================================================="
@@ -65,11 +73,19 @@ uninstall: | distclean uninstall-headers
 	@rm -f $(PREFIX)/lib/libhal*.a
 	@rm -f $(PREFIX)/lib/libkernel*.a $(PREFIX)/lib/liblwip*.a
 	@rm -f $(PREFIX)/lib/libnanvix*.a
+	@rm -f $(PREFIX)/lib/libc*.a
+	@rm -f $(PREFIX)/lib/libruntime*.a
+	@rm -f $(BINDIR)/nanvix-zombie.*
+	@rm -f $(BINDIR)/nanvix-spawn*.*
 	@echo [RM] $(PREFIX)/lib/barelib*.a
 	@echo [RM] $(PREFIX)/lib/libhal*.a
 	@echo [RM] $(PREFIX)/lib/libkernel*.a
 	@echo [RM] $(PREFIX)/lib/liblwip*.a
 	@echo [RM] $(PREFIX)/lib/libnanvix*.a
+	@echo [RM] $(PREFIX)/lib/libc*.a
+	@echo [RM] $(PREFIX)/lib/libruntime*.a
+	@echo [RM] $(BINDIR)/nanvix-zombie.*
+	@echo [RM] $(BINDIR)/nanvix-spawn*.*
 	@echo "==============================================================================="
 	@echo "Bare Libraries for Nanvix Successfully Uninstalled"
 	@echo "==============================================================================="
