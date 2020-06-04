@@ -44,11 +44,13 @@ install: | make-dirs all-target install-headers
 	@cp -f $(LIBDIR)/libhal*.a $(PREFIX)/lib 2> /dev/null || :
 	@cp -f $(LIBDIR)/libkernel*.a $(LIBDIR)/liblwip*.a $(PREFIX)/lib 2>/dev/null || :
 	@cp -f $(LIBDIR)/libnanvix*.a $(PREFIX)/lib 2>/dev/null || :
+	@cp -f $(LIBDIR)/libc*.a $(PREFIX)/lib 2>/dev/null || :
 	@echo [CP] $(PREFIX)/lib/barelib*.a
 	@echo [CP] $(PREFIX)/lib/libhal*.a
 	@echo [CP] $(PREFIX)/lib/libkernel*.a
 	@echo [CP] $(PREFIX)/lib/liblwip*.a
 	@echo [RM] $(PREFIX)/lib/libnanvix*.a
+	@echo [RM] $(PREFIX)/lib/libc*.a
 	@echo "==============================================================================="
 	@echo "Bare Libraries for Nanvix Successfully Installed"
 	@echo "==============================================================================="
@@ -65,11 +67,13 @@ uninstall: | distclean uninstall-headers
 	@rm -f $(PREFIX)/lib/libhal*.a
 	@rm -f $(PREFIX)/lib/libkernel*.a $(PREFIX)/lib/liblwip*.a
 	@rm -f $(PREFIX)/lib/libnanvix*.a
+	@rm -f $(PREFIX)/lib/libc*.a
 	@echo [RM] $(PREFIX)/lib/barelib*.a
 	@echo [RM] $(PREFIX)/lib/libhal*.a
 	@echo [RM] $(PREFIX)/lib/libkernel*.a
 	@echo [RM] $(PREFIX)/lib/liblwip*.a
 	@echo [RM] $(PREFIX)/lib/libnanvix*.a
+	@echo [RM] $(PREFIX)/lib/libc*.a
 	@echo "==============================================================================="
 	@echo "Bare Libraries for Nanvix Successfully Uninstalled"
 	@echo "==============================================================================="
