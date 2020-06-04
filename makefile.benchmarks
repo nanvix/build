@@ -22,45 +22,38 @@
 # SOFTWARE.
 #
 
-#===============================================================================
-# Target Configuration
-#===============================================================================
+# Builds contrib.
+contrib: contrib-multikernel
 
-export TARGET    ?= mppa256
-export PROCESSOR := bostan
-export CLUSTER   := k1b-cluster
-export CORE      := k1b
+# Builds contrib headers.
+contrib-headers: contrib-headers-multikernel
 
-export CFLAGS := -D __mppa256__ # Target
-export CFLAGS += -D __bostan__  # Processor
-export CFLAGS += -D __k1b__     # Cluster and Core
+# Cleans contrib.
+contrib-uninstall: contrib-uninstall-multikernel
 
-#===============================================================================
-# Toolchain Configuration
-#===============================================================================
-
-# Toolchain Directory
-export TOOLCHAIN_DIR ?= /usr/local/k1tools
-
-# Toolchain
-export CC := $(TOOLCHAIN_DIR)/bin/k1-gcc
-export LD := $(TOOLCHAIN_DIR)/bin/k1-gcc
-export AR := $(TOOLCHAIN_DIR)/bin/k1-ar
-
-# Timeout Variable
-export TIMEOUT ?= 600
-
-# Compiler Options
-export CFLAGS += -mos=bare -march=k1b -mboard=developer
-export CFLAGS += -D __HAS_HW_DIVISION=1 -D__HAS_HW_MULTIPLICATION=1
-export CFLAGS += -D __GLIBC_BUG__
-
-# Linker Options
-export LDFLAGS := -Wl,--allow-multiple-definition
+# Cleans contrib headers.
+contrib-uninstall-headers: contrib-uninstall-headers-multikernel
 
 #===============================================================================
-# Libraries
+# Microkernel
 #===============================================================================
 
-export THEIR_LIBS := -lvbsp -mhypervisor
-export LIBLWIP :=
+# Builds Microkernel.
+contrib-multikernel: make-dirs
+	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/multikernel install PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+
+# Builds Microkernel headers.
+contrib-headers-multikernel: make-dirs
+	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-headers RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/multikernel install-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+
+# Cleans Microkernel.
+contrib-uninstall-multikernel:
+	$(MAKE) -C $(CONTRIBDIR)/multikernel uninstall PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-uninstall RELEASE=$(RELEASE)
+
+# Cleans Microkernel headers.
+contrib-uninstall-headers-multikernel:
+	$(MAKE) -C $(CONTRIBDIR)/multikernel uninstall-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-uninstall-headers RELEASE=$(RELEASE)
