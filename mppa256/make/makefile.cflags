@@ -143,7 +143,7 @@ ifeq ($(RELEASE), true)
 	export CFLAGS += -fconserve-stack
 	export CFLAGS += -fcx-fortran-rules
 	export CFLAGS += -fcx-limited-range
-	export CFLAGS += -fdata-sections
+	# export CFLAGS += -fdata-sections                               # === FREEZE EXECUTION       ===
 	export CFLAGS += -fearly-inlining
 	# export CFLAGS += -fexceptions                                  # Not Supported in MPPA-256
 	export CFLAGS += -ffinite-math-only
