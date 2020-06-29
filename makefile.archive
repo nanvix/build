@@ -66,4 +66,3 @@ ifeq ($(VERBOSE), no)
 else
 	$(CC) $(CFLAGS) $< -c -o $@
 endif
-

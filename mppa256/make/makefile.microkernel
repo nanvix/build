@@ -38,8 +38,7 @@ all-k1bdp:
 		LIBKERNEL=libkernel-k1bdp.a                    \
 		LIBHAL=libhal-k1bdp.a                          \
 		BARELIB=barelib-k1bdp.a                        \
-		OBJ_SUFFIX=k1bdp                               \
-		EXEC=test-driver.k1bdp
+		OBJ_SUFFIX=k1bdp
 
 # Builds everything for ioddr node variant.
 all-k1bio:
@@ -50,7 +49,6 @@ all-k1bio:
 		LIBKERNEL=libkernel-k1bio.a                     \
 		LIBHAL=libhal-k1bio.a                           \
 		BARELIB=barelib-k1bio.a                         \
-		EXEC=test-driver.k1bio                          \
 		OBJ_SUFFIX=k1bio
 
 # Cleans object files.
@@ -74,13 +72,11 @@ distclean-k1bdp: clean-k1bdp
 	@$(MAKE) -C $(SRCDIR) distclean \
 		LIBKERNEL=libkernel-k1bdp.a \
 		LIBHAL=libhal-k1bdp.a       \
-		OBJ_SUFFIX=k1bdp            \
-		EXEC=test-driver.k1bdp
+		OBJ_SUFFIX=k1bdp
 
 # Cleans everything for ioddr variant.
 distclean-k1bio: clean-k1bio
 	@$(MAKE) -C $(SRCDIR) distclean \
 		LIBKERNEL=libkernel-k1bio.a \
 		LIBHAL=libhal-k1bio.a       \
-		OBJ_SUFFIX=k1bio            \
-		EXEC=test-driver.k1bio
+		OBJ_SUFFIX=k1bio

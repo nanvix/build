@@ -35,7 +35,7 @@ all-k1bdp:
 		CFLAGS="$(CFLAGS) -D __k1bdp__ -mcluster=node" \
 		LDFLAGS="$(LDFLAGS) -mcluster=node"            \
 		LINKERDIR=$(BUILDDIR)/mppa256/linker/k1bdp     \
-		LIBNAVNIX=libnanvix-k1bdp.a                    \
+		LIBNANVIX=libnanvix-k1bdp.a                    \
 		LIBKERNEL=libkernel-k1bdp.a                    \
 		LIBHAL=libhal-k1bdp.a                          \
 		BARELIB=barelib-k1bdp.a                        \
@@ -86,4 +86,3 @@ distclean-k1bio: clean-k1bio
 		LIBHAL=libhal-k1bio.a       \
 		BARELIB=barelib-k1bio.a     \
 		OBJ_SUFFIX=k1bio
-
