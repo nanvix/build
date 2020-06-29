@@ -57,3 +57,13 @@ ifeq ($(VERBOSE), no)
 else
 	$(CC) $(CFLAGS) $< -c -o $@
 endif
+
+# Builds an ASM source file.
+%.$(OBJ_SUFFIX).o: %.S
+ifeq ($(VERBOSE), no)
+	@echo [CC] $@
+	@$(CC) $(CFLAGS) $< -c -o $@
+else
+	$(CC) $(CFLAGS) $< -c -o $@
+endif
+
