@@ -22,6 +22,8 @@
 # SOFTWARE.
 #
 
+export CONFIG_LIBLWIP := no
+
 include $(MAKEDIR)/makefile
 
 #===============================================================================
