@@ -22,21 +22,47 @@
 # SOFTWARE.
 #
 
-export CONFIG_LIBLWIP := no
+# Builds All Object Files.
+all: $(OBJ)
+ifeq ($(VERBOSE), no)
+	@echo [AR] $(ARCHIVE)
+	@$(AR) $(ARFLAGS) $(LIBDIR)/$(ARCHIVE) $(OBJ)
+else
+	$(AR) $(ARFLAGS) $(LIBDIR)/$(ARCHIVE) $(OBJ)
+endif
 
-include $(MAKEDIR)/makefile
+# Cleans All Object Files.
+clean:
+ifeq ($(VERBOSE), no)
+	@echo [CLEAN] $(OBJ)
+	@rm -rf $(OBJ)
+else
+	rm -rf $(OBJ)
+endif
 
-#===============================================================================
+# Cleans Everything.
+distclean: clean
+ifeq ($(VERBOSE), no)
+	@echo [CLEAN] $(ARCHIVE)
+	@rm -rf $(LIBDIR)/$(ARCHIVE)
+else
+	rm -rf $(LIBDIR)/$(ARCHIVE)
+endif
 
-# Builds everything.
-all-target:
-	@$(MAKE) -C $(SRCDIR) all
+# builds a C Source File.
+%.$(OBJ_SUFFIX).o: %.c
+ifeq ($(VERBOSE), no)
+	@echo [CC] $@
+	@$(CC) $(CFLAGS) $< -c -o $@
+else
+	$(CC) $(CFLAGS) $< -c -o $@
+endif
 
-# Cleans object files.
-clean-target:
-	@$(MAKE) -C $(SRCDIR) clean
-
-# Cleans everything.
-distclean-target:
-	@$(MAKE) -C $(SRCDIR) distclean
-
+# Builds an ASM Source File.
+%.$(OBJ_SUFFIX).o: %.S
+ifeq ($(VERBOSE), no)
+	@echo [CC] $@
+	@$(CC) $(CFLAGS) $< -c -o $@
+else
+	$(CC) $(CFLAGS) $< -c -o $@
+endif

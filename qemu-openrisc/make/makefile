@@ -72,4 +72,10 @@ export OBJ_SUFFIX := qemu-openrisc
 #===============================================================================
 
 export THEIR_LIBS := -lgcc
-export LIBLWIP := liblwip-qemu-openrisc.a
+
+export CONFIG_LIBLWIP ?= yes
+ifeq ($(CONFIG_LIBLWIP),yes)
+	export LIBLWIP := liblwip-qemu-openrisc.a
+else
+	export LIBLWIP :=
+endif
