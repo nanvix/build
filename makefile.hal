@@ -40,16 +40,16 @@ contrib-uninstall-headers: contrib-uninstall-headers-barelib
 
 # Builds Kernel Library.
 contrib-barelib: make-dirs
-	$(MAKE) -C $(CONTRIBDIR)/barelib install PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/barelib install LIBHAL="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
 
 # Builds Kernel Library headers.
 contrib-headers-barelib: make-dirs
-	$(MAKE) -C $(CONTRIBDIR)/barelib install-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/barelib install-headers LIBHAL="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
 
 # Cleans Kernel Library.
 contrib-uninstall-barelib:
-	$(MAKE) -C $(CONTRIBDIR)/barelib uninstall PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/barelib uninstall LIBHAL="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
 
 # Cleans Kernel Library headers.
 contrib-uninstall-headers-barelib:
-	$(MAKE) -C $(CONTRIBDIR)/barelib uninstall-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/barelib uninstall-headers LIBHAL="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)

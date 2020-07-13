@@ -40,20 +40,20 @@ contrib-uninstall-headers: contrib-uninstall-headers-ulibc
 
 # Builds Microkernel.
 contrib-ulibc: make-dirs
-	$(MAKE) -C $(CONTRIBDIR)/ulibc contrib RELEASE=$(RELEASE)
-	$(MAKE) -C $(CONTRIBDIR)/ulibc install PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/ulibc contrib LIBRUNTIME="" RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/ulibc install LIBRUNTIME="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
 
 # Builds Microkernel headers.
 contrib-headers-ulibc: make-dirs
-	$(MAKE) -C $(CONTRIBDIR)/ulibc contrib-headers RELEASE=$(RELEASE)
-	$(MAKE) -C $(CONTRIBDIR)/ulibc install-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/ulibc contrib-headers LIBRUNTIME="" RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/ulibc install-headers LIBRUNTIME="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
 
 # Cleans Microkernel.
 contrib-uninstall-ulibc:
-	$(MAKE) -C $(CONTRIBDIR)/ulibc uninstall PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
-	$(MAKE) -C $(CONTRIBDIR)/ulibc contrib-uninstall RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/ulibc uninstall LIBRUNTIME="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/ulibc contrib-uninstall LIBRUNTIME="" RELEASE=$(RELEASE)
 
 # Cleans Microkernel headers.
 contrib-uninstall-headers-ulibc:
-	$(MAKE) -C $(CONTRIBDIR)/ulibc uninstall-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
-	$(MAKE) -C $(CONTRIBDIR)/ulibc contrib-uninstall-headers RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/ulibc uninstall-headers LIBRUNTIME="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/ulibc contrib-uninstall-headers LIBRUNTIME="" RELEASE=$(RELEASE)
