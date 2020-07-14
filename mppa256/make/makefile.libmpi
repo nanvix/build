@@ -38,7 +38,7 @@ all-k1bdp:
 		LIBMPI=libmpi-k1bdp.a                          \
 		LIBRUNTIME=libruntime-k1bdp.a                  \
 		LIBC=libc-k1bdp.a                              \
-		LIBNAVNIX=libnanvix-k1bdp.a                    \
+		LIBNANVIX=libnanvix-k1bdp.a                    \
 		LIBKERNEL=libkernel-k1bdp.a                    \
 		LIBHAL=libhal-k1bdp.a                          \
 		BARELIB=barelib-k1bdp.a                        \
