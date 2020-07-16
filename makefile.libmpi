@@ -40,20 +40,20 @@ contrib-uninstall-headers: contrib-uninstall-headers-multikernel
 
 # Builds Microkernel.
 contrib-multikernel: make-dirs
-	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib RELEASE=$(RELEASE)
-	$(MAKE) -C $(CONTRIBDIR)/multikernel install PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib LIBMPI="" RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/multikernel install LIBMPI="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
 
 # Builds Microkernel headers.
 contrib-headers-multikernel: make-dirs
-	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-headers RELEASE=$(RELEASE)
-	$(MAKE) -C $(CONTRIBDIR)/multikernel install-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-headers LIBMPI="" RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/multikernel install-headers LIBMPI="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
 
 # Cleans Microkernel.
 contrib-uninstall-multikernel:
-	$(MAKE) -C $(CONTRIBDIR)/multikernel uninstall PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
-	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-uninstall RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/multikernel uninstall LIBMPI="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-uninstall LIBMPI="" RELEASE=$(RELEASE)
 
 # Cleans Microkernel headers.
 contrib-uninstall-headers-multikernel:
-	$(MAKE) -C $(CONTRIBDIR)/multikernel uninstall-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
-	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-uninstall-headers RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/multikernel uninstall-headers LIBMPI="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-uninstall-headers LIBMPI="" RELEASE=$(RELEASE)
