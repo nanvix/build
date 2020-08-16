@@ -62,7 +62,6 @@ export CFLAGS += -D __HAS_HW_DIVISION=1 -D__HAS_HW_MULTIPLICATION=1
 
 # Linker Options
 export LDFLAGS := -nostdlib -nostdinc -ffreestanding
-export LDFLAGS += -Wl,--allow-multiple-definition
 
 # Suffix for Objects
 export OBJ_SUFFIX := qemu-openrisc
