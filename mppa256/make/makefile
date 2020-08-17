@@ -52,15 +52,19 @@ export TIMEOUT ?= 600
 
 # Compiler Options
 export CFLAGS += -mos=bare -march=k1b -mboard=developer
+export CFLAGS += -nostdlib
 export CFLAGS += -D __HAS_HW_DIVISION=1 -D__HAS_HW_MULTIPLICATION=1
 export CFLAGS += -D __GLIBC_BUG__
 
 # Linker Options
-export LDFLAGS := -Wl,--allow-multiple-definition
+export LDFLAGS := -nostdlib
 
 #===============================================================================
 # Libraries
 #===============================================================================
 
-export THEIR_LIBS := -lvbsp -mhypervisor
+export THEIR_LIBS := -lc -lgloss
+export THEIR_LIBS += -Wl,--whole-archive -lmOS -Wl,--no-whole-archive
+export THEIR_LIBS += -lvbsp -mhypervisor -lboard -lmppa_fdt -lcore -lc -lgcc
+
 export LIBLWIP :=
