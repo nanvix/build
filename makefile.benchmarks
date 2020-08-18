@@ -23,37 +23,37 @@
 #
 
 # Builds contrib.
-contrib: contrib-multikernel
+contrib: contrib-libmpi
 
 # Builds contrib headers.
-contrib-headers: contrib-headers-multikernel
+contrib-headers: contrib-headers-libmpi
 
 # Cleans contrib.
-contrib-uninstall: contrib-uninstall-multikernel
+contrib-uninstall: contrib-uninstall-libmpi
 
 # Cleans contrib headers.
-contrib-uninstall-headers: contrib-uninstall-headers-multikernel
+contrib-uninstall-headers: contrib-uninstall-headers-libmpi
 
 #===============================================================================
 # Microkernel
 #===============================================================================
 
 # Builds Microkernel.
-contrib-multikernel: make-dirs
-	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib RELEASE=$(RELEASE) SUPPRESS_TESTS=true
-	$(MAKE) -C $(CONTRIBDIR)/multikernel install PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
+contrib-libmpi: make-dirs
+	$(MAKE) -C $(CONTRIBDIR)/libmpi contrib RELEASE=$(RELEASE) SUPPRESS_TESTS=true
+	$(MAKE) -C $(CONTRIBDIR)/libmpi install PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
 
 # Builds Microkernel headers.
-contrib-headers-multikernel: make-dirs
-	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-headers RELEASE=$(RELEASE) SUPPRESS_TESTS=true
-	$(MAKE) -C $(CONTRIBDIR)/multikernel install-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
+contrib-headers-libmpi: make-dirs
+	$(MAKE) -C $(CONTRIBDIR)/libmpi contrib-headers RELEASE=$(RELEASE) SUPPRESS_TESTS=true
+	$(MAKE) -C $(CONTRIBDIR)/libmpi install-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
 
 # Cleans Microkernel.
-contrib-uninstall-multikernel:
-	$(MAKE) -C $(CONTRIBDIR)/multikernel uninstall PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
-	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-uninstall RELEASE=$(RELEASE) SUPPRESS_TESTS=true
+contrib-uninstall-libmpi:
+	$(MAKE) -C $(CONTRIBDIR)/libmpi uninstall PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
+	$(MAKE) -C $(CONTRIBDIR)/libmpi contrib-uninstall RELEASE=$(RELEASE) SUPPRESS_TESTS=true
 
 # Cleans Microkernel headers.
-contrib-uninstall-headers-multikernel:
-	$(MAKE) -C $(CONTRIBDIR)/multikernel uninstall-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
-	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-uninstall-headers RELEASE=$(RELEASE) SUPPRESS_TESTS=true
+contrib-uninstall-headers-libmpi:
+	$(MAKE) -C $(CONTRIBDIR)/libmpi uninstall-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
+	$(MAKE) -C $(CONTRIBDIR)/libmpi contrib-uninstall-headers RELEASE=$(RELEASE) SUPPRESS_TESTS=true

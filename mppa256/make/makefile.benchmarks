@@ -35,6 +35,7 @@ all-k1bdp:
 		CFLAGS="$(CFLAGS) -D __k1bdp__ -mcluster=node" \
 		LDFLAGS="$(LDFLAGS) -mcluster=node"            \
 		LINKERDIR=$(BUILDDIR)/mppa256/linker/k1bdp     \
+		LIBMPI=libmpi-k1bdp.a                          \
 		LIBRUNTIME=libruntime-k1bdp.a                  \
 		LIBC=libc-k1bdp.a                              \
 		LIBNANVIX=libnanvix-k1bdp.a                    \
@@ -49,6 +50,7 @@ all-k1bio:
 		CFLAGS="$(CFLAGS) -D __k1bio__ -mcluster=ioddr" \
 		LDFLAGS="$(LDFLAGS) -mcluster=ioddr"            \
 		LINKERDIR=$(BUILDDIR)/mppa256/linker/k1bio      \
+		LIBMPI=libmpi-k1bio.a                           \
 		LIBRUNTIME=libruntime-k1bio.a                   \
 		LIBC=libc-k1bio.a                               \
 		LIBNANVIX=libnanvix-k1bio.a                     \
@@ -76,6 +78,7 @@ distclean-target: distclean-k1bdp distclean-k1bio
 # Cleans everything for node cluster variant.
 distclean-k1bdp: clean-k1bdp
 	@$(MAKE) -C $(SRCDIR) distclean   \
+		LIBMPI=libmpi-k1bdp.a         \
 		LIBRUNTIME=libruntime-k1bdp.a \
 		LIBC=libc-k1bdp.a             \
 		LIBNANVIX=libnanvix-k1bdp.a   \
@@ -87,6 +90,7 @@ distclean-k1bdp: clean-k1bdp
 # Cleans everything for ioddr variant.
 distclean-k1bio: clean-k1bio
 	@$(MAKE) -C $(SRCDIR) distclean   \
+		LIBMPI=libmpi-k1bio.a         \
 		LIBRUNTIME=libruntime-k1bio.a \
 		LIBC=libc-k1bio.a             \
 		LIBNANVIX=libnanvix-k1bio.a   \
