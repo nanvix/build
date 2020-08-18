@@ -40,20 +40,20 @@ contrib-uninstall-headers: contrib-uninstall-headers-multikernel
 
 # Builds Microkernel.
 contrib-multikernel: make-dirs
-	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib RELEASE=$(RELEASE)
-	$(MAKE) -C $(CONTRIBDIR)/multikernel install PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib RELEASE=$(RELEASE) SUPPRESS_TESTS=true
+	$(MAKE) -C $(CONTRIBDIR)/multikernel install PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
 
 # Builds Microkernel headers.
 contrib-headers-multikernel: make-dirs
-	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-headers RELEASE=$(RELEASE)
-	$(MAKE) -C $(CONTRIBDIR)/multikernel install-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-headers RELEASE=$(RELEASE) SUPPRESS_TESTS=true
+	$(MAKE) -C $(CONTRIBDIR)/multikernel install-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
 
 # Cleans Microkernel.
 contrib-uninstall-multikernel:
-	$(MAKE) -C $(CONTRIBDIR)/multikernel uninstall PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
-	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-uninstall RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/multikernel uninstall PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
+	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-uninstall RELEASE=$(RELEASE) SUPPRESS_TESTS=true
 
 # Cleans Microkernel headers.
 contrib-uninstall-headers-multikernel:
-	$(MAKE) -C $(CONTRIBDIR)/multikernel uninstall-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
-	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-uninstall-headers RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/multikernel uninstall-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
+	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-uninstall-headers RELEASE=$(RELEASE) SUPPRESS_TESTS=true
