@@ -57,7 +57,7 @@ export CFLAGS += -D __HAS_HW_DIVISION=1 -D__HAS_HW_MULTIPLICATION=1
 export CFLAGS += -D __GLIBC_BUG__
 
 # Linker Options
-export LDFLAGS := -nostdlib
+export LDFLAGS := -nostdlib -ffreestanding
 
 #===============================================================================
 # Libraries
@@ -65,6 +65,6 @@ export LDFLAGS := -nostdlib
 
 export THEIR_LIBS := -lc -lgloss
 export THEIR_LIBS += -Wl,--whole-archive -lmOS -Wl,--no-whole-archive
-export THEIR_LIBS += -lvbsp -mhypervisor -lboard -lmppa_fdt -lcore -lc -lgcc
+export THEIR_LIBS += -lvbsp -mhypervisor -lboard -lmppa_fdt -lcore -lc
 
 export LIBLWIP :=
