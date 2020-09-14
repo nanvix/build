@@ -49,7 +49,7 @@ export LD := ld
 export AR := ar
 
 # Timeout Variable
-export TIMEOUT ?= 60
+export TIMEOUT ?= 120
 
 # Compiler Options
 export CFLAGS += -D_GNU_SOURCE -D_POSIX_C_SOURCE=200112L
