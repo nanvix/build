@@ -35,25 +35,25 @@ contrib-uninstall: contrib-uninstall-multikernel
 contrib-uninstall-headers: contrib-uninstall-headers-multikernel
 
 #===============================================================================
-# Microkernel
+# Multikernel
 #===============================================================================
 
-# Builds Microkernel.
+# Builds Multikernel.
 contrib-multikernel: make-dirs
 	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib LIBMPI="" RELEASE=$(RELEASE) SUPPRESS_TESTS=true
-	$(MAKE) -C $(CONTRIBDIR)/multikernel install LIBMPI="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
+	$(MAKE) -C $(CONTRIBDIR)/multikernel install LIBMPI="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true NANVIX_LWMPI=$(NANVIX_LWMPI)
 
-# Builds Microkernel headers.
+# Builds Multikernel headers.
 contrib-headers-multikernel: make-dirs
 	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-headers LIBMPI="" RELEASE=$(RELEASE) SUPPRESS_TESTS=true
-	$(MAKE) -C $(CONTRIBDIR)/multikernel install-headers LIBMPI="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
+	$(MAKE) -C $(CONTRIBDIR)/multikernel install-headers LIBMPI="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true NANVIX_LWMPI=$(NANVIX_LWMPI)
 
-# Cleans Microkernel.
+# Cleans Multikernel.
 contrib-uninstall-multikernel:
 	$(MAKE) -C $(CONTRIBDIR)/multikernel uninstall LIBMPI="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
 	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-uninstall LIBMPI="" RELEASE=$(RELEASE) SUPPRESS_TESTS=true
 
-# Cleans Microkernel headers.
+# Cleans Multikernel headers.
 contrib-uninstall-headers-multikernel:
 	$(MAKE) -C $(CONTRIBDIR)/multikernel uninstall-headers LIBMPI="" PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
 	$(MAKE) -C $(CONTRIBDIR)/multikernel contrib-uninstall-headers LIBMPI="" RELEASE=$(RELEASE) SUPPRESS_TESTS=true

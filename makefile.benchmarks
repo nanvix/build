@@ -35,25 +35,25 @@ contrib-uninstall: contrib-uninstall-libmpi
 contrib-uninstall-headers: contrib-uninstall-headers-libmpi
 
 #===============================================================================
-# Microkernel
+# LWMPI
 #===============================================================================
 
-# Builds Microkernel.
+# Builds LWMPI.
 contrib-libmpi: make-dirs
 	$(MAKE) -C $(CONTRIBDIR)/libmpi contrib RELEASE=$(RELEASE) SUPPRESS_TESTS=true
-	$(MAKE) -C $(CONTRIBDIR)/libmpi install PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
+	$(MAKE) -C $(CONTRIBDIR)/libmpi install PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true NANVIX_LWMPI=$(NANVIX_LWMPI)
 
-# Builds Microkernel headers.
+# Builds LWMPI headers.
 contrib-headers-libmpi: make-dirs
 	$(MAKE) -C $(CONTRIBDIR)/libmpi contrib-headers RELEASE=$(RELEASE) SUPPRESS_TESTS=true
-	$(MAKE) -C $(CONTRIBDIR)/libmpi install-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
+	$(MAKE) -C $(CONTRIBDIR)/libmpi install-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true NANVIX_LWMPI=$(NANVIX_LWMPI)
 
-# Cleans Microkernel.
+# Cleans LWMPI.
 contrib-uninstall-libmpi:
 	$(MAKE) -C $(CONTRIBDIR)/libmpi uninstall PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
 	$(MAKE) -C $(CONTRIBDIR)/libmpi contrib-uninstall RELEASE=$(RELEASE) SUPPRESS_TESTS=true
 
-# Cleans Microkernel headers.
+# Cleans LWMPI headers.
 contrib-uninstall-headers-libmpi:
 	$(MAKE) -C $(CONTRIBDIR)/libmpi uninstall-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE) SUPPRESS_TESTS=true
 	$(MAKE) -C $(CONTRIBDIR)/libmpi contrib-uninstall-headers RELEASE=$(RELEASE) SUPPRESS_TESTS=true
