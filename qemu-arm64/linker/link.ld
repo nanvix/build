@@ -91,5 +91,6 @@ SECTIONS
 
 	__BSS_SIZE = __BSS_END - __BSS_START;
 
+	stack_base = .;
 	stack_top = . + 0x4000;
 }
