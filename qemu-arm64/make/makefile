@@ -52,7 +52,7 @@ export AR := $(TOOLCHAIN_DIR)/aarch64-elf-ar
 export TIMEOUT ?= 120
 
 # Compiler Options
-export CFLAGS += -march=armv8-a -mabi=lp64 -mtune=cortex-a53
+export CFLAGS += -march=armv8-a+nofp -mabi=lp64 -mtune=cortex-a53
 export CFLAGS += -ffunction-sections -fdata-sections
 export CFLAGS += -nostdlib -nostdinc -ffreestanding
 export CFLAGS += -pedantic-errors
