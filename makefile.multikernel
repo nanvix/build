@@ -22,6 +22,8 @@
 # SOFTWARE.
 #
 
+export LIBNAME=multikernel
+
 # Builds contrib.
 contrib: contrib-ulibc
 

@@ -27,8 +27,10 @@ all: $(OBJ)
 ifeq ($(VERBOSE), no)
 	@echo [AR] $(ARCHIVE)
 	@$(AR) $(ARFLAGS) $(LIBDIR)/$(ARCHIVE) $(OBJ)
+	@bash $(TOOLSDIR)/rename-sections.sh $(LIBDIR)/$(ARCHIVE) $(LIBNAME)
 else
 	$(AR) $(ARFLAGS) $(LIBDIR)/$(ARCHIVE) $(OBJ)
+	bash $(TOOLSDIR)/rename-sections.sh $(LIBDIR)/$(ARCHIVE) $(LIBNAME)
 endif
 
 # Cleans All Object Files.

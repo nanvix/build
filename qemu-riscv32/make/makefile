@@ -47,9 +47,11 @@ export TOOLCHAIN_DIR ?= $(TOOLSDIR)/toolchain/riscv32/bin
 export CC := $(TOOLCHAIN_DIR)/riscv32-elf-gcc
 export LD := $(TOOLCHAIN_DIR)/riscv32-elf-ld
 export AR := $(TOOLCHAIN_DIR)/riscv32-elf-ar
+export OBJCOPY := $(TOOLCHAIN_DIR)/riscv32-elf-objcopy
+export OBJDUMP := $(TOOLCHAIN_DIR)/riscv32-elf-objdump
 
 # Timeout Variable
-export TIMEOUT ?= 120
+export TIMEOUT ?= 180
 
 # Compiler Options
 export CFLAGS += -march=rv32imac -mabi=ilp32 -mcmodel=medany
