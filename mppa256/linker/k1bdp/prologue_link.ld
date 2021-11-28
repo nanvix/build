@@ -63,9 +63,19 @@
 		KEEP(*(.init))
 		KEEP(*(.fini))
 		__TEXT_START = ABSOLUTE(.);
+      *(.hal.text)
+      *(.microkernel.text)
+      *(.libnanvix.text)
+      *(.ulibc.text)
+      *(.multikernel.text)
 			*(.text)
 		__TEXT_END = ABSOLUTE(.);
-		*(.text.*)
+    *(.hal.text.*)
+    *(.microkernel.text.*)
+    *(.libnanvix.text.*)
+    *(.ulibc.text.*)
+    *(.multikernel.text.*)
+    *(.text.*)
 		*(.gnu.linkonce.t.*)
 		. = ALIGN(4096);
 		__text_end = ABSOLUTE(.);
@@ -91,8 +101,18 @@
     KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o $OTHER_EXCLUDE_FILES) .ctors))
     KEEP (*(SORT(.ctors.*)))
     KEEP (*(.ctors))
-    *(.rodata.*)
-    *(.rodata)
+    *(.hal.rodata)
+		*(.hal.rodata.*)
+		*(.microkernel.rodata)
+		*(.microkernel.rodata.*)
+		*(.libnanvix.rodata)
+		*(.libnanvix.rodata.*)
+		*(.ulibc.rodata)
+		*(.ulibc.rodata.*)
+		*(.multikernel.rodata)
+		*(.multikernel.rodata.*)
+		*(.rodata)
+		*(.rodata.*)
     *(.csp_caps)
     *(.locked.rodata.*)
     *(.locked.rodata)
@@ -209,10 +229,20 @@
   {
     _data_start = ABSOLUTE(.);
 	__DATA_START = ABSOLUTE(.);
+    *(.hal.data)
+		*(.microkernel.data)
+		*(.libnanvix.data)
+		*(.ulibc.data)
+		*(.multikernel.data)
 		*(.data)
 	__DATA_END = ABSOLUTE(.);
     *(.tls_start*)
-    *(.data.*)
+    *(.hal.data.*)
+		*(.microkernel.data.*)
+		*(.libnanvix.data.*)
+		*(.ulibc.data.*)
+		*(.multikernel.data.*)
+		*(.data.*)
     *(.gnu.linkonce.d.*)
     *(COMMON)
     . = ALIGN(0x20);
@@ -223,8 +253,18 @@
   {
     _bss_start = ABSOLUTE(.);
 		__BSS_START = ABSOLUTE(.);
-			*(.bss)
+      *(.hal.bss)
+      *(.microkernel.bss)
+      *(.libnanvix.bss)
+      *(.ulibc.bss)
+      *(.multikernel.bss)
+      *(.bss)
 		__BSS_END = ABSOLUTE(.);
+    *(.hal.bss.*)
+		*(.microkernel.bss.*)
+		*(.libnanvix.bss.*)
+		*(.ulibc.bss.*)
+		*(.multikernel.bss.*)
 		*(.bss.*)
 		*(.dynbss)
 		*(.dynbss.*)
