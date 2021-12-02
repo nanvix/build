@@ -49,6 +49,7 @@
     *(.locked.handler) /* trap handlers */
     *(.locked.init_code) /* trap handlers */
     *(.locked.locked_text)
+    *(.hal.locked_text)
     *(.locked.text)
     *(.locked.text.*)
 	*(.bsp_config_text)
