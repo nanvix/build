@@ -60,24 +60,50 @@
   }  =0x12345678
   _debug_start_lma  = LOADADDR( .locked_text ) + _debug_start - __text_begin;
 
-	.text  ALIGN(0x100) : AT ( ALIGN( LOADADDR(.locked_text) + SIZEOF(.locked_text), 0x100))
+  .hal ALIGN(0x100) : AT ( ALIGN( LOADADDR(.locked_text) + SIZEOF(.locked_text), 0x100))
+  {
+		__TEXT_START = ABSOLUTE(.);
+    *(.hal.text)
+    *(.hal.text.*)
+    . = ALIGN(4096);
+  }
+
+  .microkernel ALIGN(0x100) : AT ( ALIGN( LOADADDR(.hal) + SIZEOF(.hal), 0x100))
+  {
+    *(.microkernel.text)
+    *(.microkernel.text.*)
+    . = ALIGN(4096);
+  }
+
+  .libnanvix ALIGN(0x100) : AT ( ALIGN( LOADADDR(.microkernel) + SIZEOF(.microkernel), 0x100))
+  {
+    *(.libnanvix.text)
+    *(.libnanvix.text.*)
+    . = ALIGN(4096);
+  }
+
+  .ulibc ALIGN(0x100) : AT ( ALIGN( LOADADDR(.libnanvix) + SIZEOF(.libnanvix), 0x100))
+  {
+    *(.ulibc.text)
+    *(.ulibc.text.*)
+    . = ALIGN(4096);
+  }
+
+  .multikernel ALIGN(0x100) : AT ( ALIGN( LOADADDR(.ulibc) + SIZEOF(.ulibc), 0x100))
+  {
+    *(.multikernel.text)
+    *(.multikernel.text.*)
+    . = ALIGN(4096);
+  }
+
+
+	.text  ALIGN(0x100) : AT ( ALIGN( LOADADDR(.hal) + SIZEOF(.hal), 0x100))
 	{
 		KEEP(*(.init))
 		KEEP(*(.fini))
-		__TEXT_START = ABSOLUTE(.);
-			*(.hal.text)
-      *(.microkernel.text)
-      *(.libnanvix.text)
-      *(.ulibc.text)
-      *(.multikernel.text)
-			*(.text)
-		__TEXT_END = ABSOLUTE(.);
-		*(.hal.text.*)
-    *(.microkernel.text.*)
-    *(.libnanvix.text.*)
-    *(.ulibc.text.*)
-    *(.multikernel.text.*)
+		*(.text)
     *(.text.*)
+		__TEXT_END = ABSOLUTE(.);
 		*(.gnu.linkonce.t.*)
 		. = ALIGN(4096);
 		__text_end = ABSOLUTE(.);
