@@ -81,6 +81,7 @@
     __LIBNANVIX_TEXT_START = ABSOLUTE(.);
     *(.libnanvix.text)
     *(.libnanvix.text.*)
+    *(.user.libnanvix.text)
     __LIBNANVIX_TEXT_END = ABSOLUTE(.);
     __ULIBC_TEXT_START = ABSOLUTE(.);
     *(.ulibc.text)
@@ -275,6 +276,7 @@
   __LIBNANVIX_DATA_START = ABSOLUTE(.);
 		*(.libnanvix.data)
 		*(.libnanvix.data.*)
+    *(.user.libnanvix.data)
   __LIBNANVIX_DATA_END = ABSOLUTE(.);
   __ULIBC_DATA_START = ABSOLUTE(.);
 		*(.ulibc.data)
