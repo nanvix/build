@@ -61,40 +61,44 @@
 
   .kernel_text ALIGN(0x8) : AT ( ALIGN( LOADADDR(.locked_text) + SIZEOF(.locked_text), 0x8))
   {
-		KEEP(*(.init))
-		KEEP(*(.fini))
-		__TEXT_START = ABSOLUTE(.);
+	KEEP(*(.init))
+	KEEP(*(.fini))
+	__TEXT_START = ABSOLUTE(.);
     __KERNEL_TEXT_START = ABSOLUTE(.);
     __BARELIB_TEXT_START = ABSOLUTE(.);
-    *(.barelib.text)
-    *(.barelib.text.*)
+		*(.barelib.text)
+		*(.barelib.text.*)
     __BARELIB_TEXT_END = ABSOLUTE(.);
     __HAL_TEXT_START = ABSOLUTE(.);
-    *(.hal.text)
-    *(.hal.text.*)
+		*(.hal.text)
+		*(.hal.text.*)
     __HAL_TEXT_END = ABSOLUTE(.);
     __MICROKERNEL_TEXT_START = ABSOLUTE(.);
-    *(.microkernel.text)
-    *(.microkernel.text.*)
+		*(.microkernel.text)
+		*(.microkernel.text.*)
     __MICROKERNEL_TEXT_END = ABSOLUTE(.);
     __LIBNANVIX_TEXT_START = ABSOLUTE(.);
-    *(.libnanvix.text)
-    *(.libnanvix.text.*)
-    *(.user.libnanvix.text)
+		*(.libnanvix.text)
+		*(.libnanvix.text.*)
+		*(.user.libnanvix.text)
     __LIBNANVIX_TEXT_END = ABSOLUTE(.);
     __ULIBC_TEXT_START = ABSOLUTE(.);
-    *(.ulibc.text)
-    *(.ulibc.text.*)
+		*(.ulibc.text)
+		*(.ulibc.text.*)
     __ULIBC_TEXT_END = ABSOLUTE(.);
     __MULTIKERNEL_TEXT_START = ABSOLUTE(.);
-    *(.multikernel.text)
-    *(.multikernel.text.*)
+		*(.multikernel.text)
+		*(.multikernel.text.*)
     __MULTIKERNEL_TEXT_END = ABSOLUTE(.);
+    __LIBMPI_TEXT_START = ABSOLUTE(.);
+		*(.libmpi*.text)
+		*(.libmpi*.text.*)
+    __LIBMPI_TEXT_END = ABSOLUTE(.);
  		*(.text)
-    *(.text.*)
-    __TEXT_END = ABSOLUTE(.);
+		*(.text.*)
  		__text_end = ABSOLUTE(.);
     __KERNEL_TEXT_END = ABSOLUTE(.);
+    __TEXT_END = ABSOLUTE(.);
     . = ALIGN(8);
   }
 
@@ -121,11 +125,11 @@
     KEEP (*(.ctors))
 
     __BARELIB_RODATA_START = ABSOLUTE(.);
-    *(.barelib.rodata)
-    *(.barelib.rodata.*)
+		*(.barelib.rodata)
+		*(.barelib.rodata.*)
     __BARELIB_RODATA_END = ABSOLUTE(.);
     __HAL_RODATA_START = ABSOLUTE(.);
-    *(.hal.rodata)
+		*(.hal.rodata)
 		*(.hal.rodata.*)
     __HAL_RODATA_END = ABSOLUTE(.);
     __MICROKERNEL_RODATA_START = ABSOLUTE(.);
@@ -144,6 +148,10 @@
 		*(.multikernel.rodata)
 		*(.multikernel.rodata.*)
     __MULTIKERNEL_RODATA_END = ABSOLUTE(.);
+    __LIBMPI_RODATA_START = ABSOLUTE(.);
+		*(.libmpi*.rodata)
+		*(.libmpi*.rodata.*)
+    __LIBMPI_RODATA_END = ABSOLUTE(.);
     *(.rodata)
     *(.rodata.*)
     *(.csp_caps)
@@ -261,34 +269,38 @@
 
   .kernel_data   ALIGN(0x8) :  AT ( ALIGN( LOADADDR(.rela.plt) + SIZEOF(.rela.plt), 0x8))
   {
-    __KERNEL_DATA_START = ABSOLUTE(.);
-    _data_start = ABSOLUTE(.);
+	__KERNEL_DATA_START = ABSOLUTE(.);
+	_data_start = ABSOLUTE(.);
 	__DATA_START = ABSOLUTE(.);
-  __BARELIB_DATA_START = ABSOLUTE(.);
-    *(.barelib.data)
-    *(.barelib.data.*)
-  __BARELIB_DATA_END = ABSOLUTE(.);
-  __HAL_DATA_START = ABSOLUTE(.);
+	__BARELIB_DATA_START = ABSOLUTE(.);
+		*(.barelib.data)
+		*(.barelib.data.*)
+	__BARELIB_DATA_END = ABSOLUTE(.);
+	__HAL_DATA_START = ABSOLUTE(.);
 		*(.hal.data)
-    *(.hal.data.*)
-  __HAL_DATA_END = ABSOLUTE(.);
-  __MICROKERNEL_DATA_START = ABSOLUTE(.);
+		*(.hal.data.*)
+	__HAL_DATA_END = ABSOLUTE(.);
+	__MICROKERNEL_DATA_START = ABSOLUTE(.);
 		*(.microkernel.data)
 		*(.microkernel.data.*)
-  __MICROKERNEL_DATA_END = ABSOLUTE(.);
-  __LIBNANVIX_DATA_START = ABSOLUTE(.);
+	__MICROKERNEL_DATA_END = ABSOLUTE(.);
+	__LIBNANVIX_DATA_START = ABSOLUTE(.);
 		*(.libnanvix.data)
 		*(.libnanvix.data.*)
-    *(.user.libnanvix.data)
-  __LIBNANVIX_DATA_END = ABSOLUTE(.);
-  __ULIBC_DATA_START = ABSOLUTE(.);
+		*(.user.libnanvix.data)
+	__LIBNANVIX_DATA_END = ABSOLUTE(.);
+	__ULIBC_DATA_START = ABSOLUTE(.);
 		*(.ulibc.data)
 		*(.ulibc.data.*)
-  __ULIBC_DATA_END = ABSOLUTE(.);
-  __MULTIKERNEL_DATA_START = ABSOLUTE(.);
+	__ULIBC_DATA_END = ABSOLUTE(.);
+	__MULTIKERNEL_DATA_START = ABSOLUTE(.);
 		*(.multikernel.data)
 		*(.multikernel.data.*)
-  __MULTIKERNEL_DATA_END = ABSOLUTE(.);
+	__MULTIKERNEL_DATA_END = ABSOLUTE(.);
+	__LIBMPI_DATA_START = ABSOLUTE(.);
+		*(.libmpi*.data)
+		*(.libmpi*.data.*)
+	__LIBMPI_DATA_END = ABSOLUTE(.);
     *(.data)
     *(.data.*)
     *(.tls_start*)
@@ -303,35 +315,39 @@
   .kernel_bss   ALIGN(0x20) :  AT ( ALIGN( LOADADDR(.kernel_data) + SIZEOF(.kernel_data), 0x20))
   {
     __KERNEL_BSS_START = ABSOLUTE(.);
-    _bss_start = ABSOLUTE(.);
-		__BSS_START = ABSOLUTE(.);
+    	_bss_start = ABSOLUTE(.);
+	__BSS_START = ABSOLUTE(.);
     __BARELIB_BSS_START = ABSOLUTE(.);
-    *(.barelib.bss)
-    *(.barelib.bss.*)
+		*(.barelib.bss)
+		*(.barelib.bss.*)
     __BARELIB_BSS_END = ABSOLUTE(.);
     __HAL_BSS_START = ABSOLUTE(.);
-    *(.hal.bss)
+    	*(.hal.bss)
 		*(.hal.bss.*)
     __HAL_BSS_END = ABSOLUTE(.);
     __MICROKERNEL_BSS_START = ABSOLUTE(.);
-    *(.microkernel.bss)
+    	*(.microkernel.bss)
 		*(.microkernel.bss.*)
     __MICROKERNEL_BSS_END = ABSOLUTE(.);
     __LIBNANVIX_BSS_START = ABSOLUTE(.);
-    *(.libnanvix.bss)
+    	*(.libnanvix.bss)
 		*(.libnanvix.bss.*)
     __LIBANANVIX_BSS_END = ABSOLUTE(.);
     __ULIBC_BSS_START = ABSOLUTE(.);
-    *(.ulibc.bss)
+    	*(.ulibc.bss)
 		*(.ulibc.bss.*)
     __ULIBC_BSS_END = ABSOLUTE(.);
     __MULTIKERNEL_BSS_START = ABSOLUTE(.);
-    *(.multikernel.bss)
+    	*(.multikernel.bss)
 		*(.multikernel.bss.*)
     __MULTIKERNEL_BSS_END = ABSOLUTE(.);
-    *(.bss)
-    *(.bss.*)
-		__BSS_END = ABSOLUTE(.);
+    __LIBMPI_BSS_START = ABSOLUTE(.);
+    	*(.libmpi*.bss)
+		*(.libmpi*.bss.*)
+    __LIBMPI_BSS_END = ABSOLUTE(.);
+		*(.bss)
+		*(.bss.*)
+	__BSS_END = ABSOLUTE(.);
 		*(.dynbss)
 		*(.dynbss.*)
 		*(.gnu.linkonce.b.*)
