@@ -360,8 +360,10 @@
 	{
     __USER_START = ABSOLUTE(.);
     __USER_TEXT_START = ABSOLUTE(.);
-    *(.user.text)
-    *(.user.text.*)
+		*(.user.text)
+		*(.user.text.*)
+		*(.user.user*.text)
+		*(.user.user*.text.*)
     __USER_TEXT_END = ABSOLUTE(.);
     . = ALIGN(0x1000);
   }
@@ -369,8 +371,10 @@
   .rodata ALIGN(0x1000) :  AT ( ALIGN( LOADADDR(.text) + SIZEOF(.text), 0x1000))
   {
    __USER_RODATA_START = ABSOLUTE(.);
-    *(.user.rodata)
-    *(.user.rodata.*)
+		*(.user.rodata)
+		*(.user.rodata.*)
+		*(.user.user*.rodata)
+		*(.user.user*.rodata.*)
     __USER_RODATA_END = ABSOLUTE(.);
     . = ALIGN(0x8);
   }
@@ -380,6 +384,8 @@
     __USER_DATA_START = ABSOLUTE(.);
 		*(.user.data)
 		*(.user.data.*)
+		*(.user.user*.data)
+		*(.user.user*.data.*)
     __USER_DATA_END = ABSOLUTE(.);
     . = ALIGN(0x20);
   }
@@ -387,8 +393,10 @@
   .bss   ALIGN(0x20) :  AT ( ALIGN( LOADADDR(.data) + SIZEOF(.data), 0x20))
   {
     __USER_BSS_START = ABSOLUTE(.);
-    *(.user.bss)
+		*(.user.bss)
 		*(.user.bss.*)
+		*(.user.user*.bss)
+		*(.user.user*.bss.*)
     __USER_BSS_END = ABSOLUTE(.);
     . = ALIGN(8);
     __USER_END = ABSOLUTE(.);
