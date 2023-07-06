@@ -65,10 +65,54 @@ SECTIONS
 	. = ALIGN(PAGE_SIZE);
 
 	/* Text. */
-	.text : AT(ADDR(.text))
+	.hal : AT(ADDR(.hal))
 	{
 		__TEXT_START = .;
+		__HAL_TEXT_START = .;
+		*(.hal.text)
+		*(.hal.text.*)
+		__HAL_TEXT_END = .;
+	} > ram
+
+	.microkernel : AT(ADDR(.microkernel))
+	{
+		__MICROKERNEL_TEXT_START = .;
+		*(.microkernel.text)
+		*(.microkernel.text.*)
+		__MICROKERNEL_TEXT_END = .;
+	} > ram
+
+	.libnanvix : AT(ADDR(.libnanvix))
+	{
+		__LIBNANVIX_TEXT_START = .;
+		*(.libnanvix.text)
+		*(.libnanvix.text.*)
+		__LIBNANVIX_TEXT_END = .;
+	} > ram
+
+	.ulibc : AT(ADDR(.ulibc))
+	{
+		__ULIBC_TEXT_START = .;
+		*(.ulibc.text)
+		*(.ulibc.text.*)
+		__ULIBC_TEXT_END = .;
+	} > ram
+
+	.multikernel : AT(ADDR(.multikernel))
+	{
+		__MULTIKERNEL_TEXT_START = .;
+		*(.multikernel.text)
+		*(.multikernel.text.*)
+		__MULTIKERNEL_TEXT_END = .;
+	} > ram
+
+	/* Text. */
+	.text : AT(ADDR(.text))
+	{
+		__USER_TEXT_START = .;
 		*(.text)
+		*(.text.*)
+		__USER_TEXT_END = .;
 		__TEXT_END = .;
 	} > ram
 
@@ -82,8 +126,42 @@ SECTIONS
 	.data : AT(ADDR(.data))
 	{
 		__DATA_START = .;
+		*(.hal.rodata)
+		*(.hal.rodata.*)
+		*(.microkernel.rodata)
+		*(.microkernel.rodata.*)
+		*(.libnanvix.rodata)
+		*(.libnanvix.rodata.*)
+		*(.ulibc.rodata)
+		*(.ulibc.rodata.*)
+		*(.multikernel.rodata)
+		*(.multikernel.rodata.*)
 		*(.rodata)
+		*(.rodata.*)
+		*(.hal.data)
+		*(.hal.data.*)
+		*(.microkernel.data)
+		*(.microkernel.data.*)
+		*(.libnanvix.data)
+		*(.libnanvix.data.*)
+		*(.ulibc.data)
+		*(.ulibc.data.*)
+		*(.multikernel.data)
+		*(.multikernel.data.*)
 		*(.data)
+		*(.data.*)
+		*(.hal.sdata)
+		*(.hal.sdata.*)
+		*(.microkernel.sdata)
+		*(.microkernel.sdata.*)
+		*(.libnanvix.sdata)
+		*(.libnanvix.sdata.*)
+		*(.ulibc.sdata)
+		*(.ulibc.sdata.*)
+		*(.multikernel.sdata)
+		*(.multikernel.sdata.*)
+		*(.sdata)
+		*(.sdata.*)
 		__DATA_END = .;
 	} > ram
 
@@ -91,7 +169,30 @@ SECTIONS
 	.bss : AT(ADDR(.bss))
 	{
 		__BSS_START = .;
+		*(.hal.bss)
+		*(.hal.bss.*)
+		*(.microkernel.bss)
+		*(.microkernel.bss.*)
+		*(.libnanvix.bss)
+		*(.libnanvix.bss.*)
+		*(.ulibc.bss)
+		*(.ulibc.bss.*)
+		*(.multikernel.bss)
+		*(.multikernel.bss.*)
 		*(.bss)
+		*(.bss.*)
+		*(.hal.sbss)
+		*(.hal.sbss.*)
+		*(.microkernel.sbss)
+		*(.microkernel.sbss.*)
+		*(.libnanvix.sbss)
+		*(.libnanvix.sbss.*)
+		*(.ulibc.sbss)
+		*(.ulibc.sbss.*)
+		*(.multikernel.sbss)
+		*(.multikernel.sbss.*)
+		*(.sbss)
+		*(.sbss.*)
 		__BSS_END = .;
 	} > ram
 

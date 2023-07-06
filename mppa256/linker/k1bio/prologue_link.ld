@@ -35,7 +35,7 @@
 
   .boot VIRT_U_MEM_START :  AT (ALIGN ( LOADADDR(.mOS) + MOS_RESERVED, 0x1000))
   {
-	KEEP(*(.locked.binaries))
+  KEEP(*(.locked.binaries))
     _bin_start = ABSOLUTE(.);
     _vstart = ABSOLUTE(.);
     *(.locked.boot)    /* boot section */
@@ -45,34 +45,64 @@
 
   .locked_text ALIGN(0x1000) : AT ( ALIGN( LOADADDR(.boot) + SIZEOF(.boot), 0x1000))
   {
-	__text_begin = ABSOLUTE(.);
+  __text_begin = ABSOLUTE(.);
     _handler_start = ABSOLUTE(.);
     *(.locked.handler) /* trap handlers */
     *(.locked.init_code) /* trap handlers */
     *(.locked.locked_text)
+    *(.hal.locked_text)
     *(.locked.text)
     *(.locked.text.*)
-	*(.bsp_config_text)
+  *(.bsp_config_text)
     _debug_start = ABSOLUTE(.);
     . += DEBUG_SIZE;
     . = ALIGN(0x8);
   }  =0x12345678
   _debug_start_lma  = LOADADDR( .locked_text ) + _debug_start - __text_begin;
 
-	.text  ALIGN(0x100) : AT ( ALIGN( LOADADDR(.locked_text) + SIZEOF(.locked_text), 0x100))
-	{
-		KEEP(*(.init))
-		KEEP(*(.fini))
-		__TEXT_START = ABSOLUTE(.);
-			*(.text)
-		__TEXT_END = ABSOLUTE(.);
-		*(.text.*)
-		*(.gnu.linkonce.t.*)
-		. = ALIGN(4096);
-		__text_end = ABSOLUTE(.);
-	}
+  .kernel_text ALIGN(0x8) : AT ( ALIGN( LOADADDR(.locked_text) + SIZEOF(.locked_text), 0x8))
+  {
+    KEEP(*(.init))
+    KEEP(*(.fini))
+    __TEXT_START = ABSOLUTE(.);
+    __KERNEL_TEXT_START = ABSOLUTE(.);
+    __BARELIB_TEXT_START = ABSOLUTE(.);
+    *(.barelib.text)
+    *(.barelib.text.*)
+    __BARELIB_TEXT_END = ABSOLUTE(.);
+    __HAL_TEXT_START = ABSOLUTE(.);
+    *(.hal.text)
+    *(.hal.text.*)
+    __HAL_TEXT_END = ABSOLUTE(.);
+    __MICROKERNEL_TEXT_START = ABSOLUTE(.);
+    *(.microkernel.text)
+    *(.microkernel.text.*)
+    __MICROKERNEL_TEXT_END = ABSOLUTE(.);
+    __LIBNANVIX_TEXT_START = ABSOLUTE(.);
+    *(.libnanvix.text)
+    *(.libnanvix.text.*)
+    __LIBNANVIX_TEXT_END = ABSOLUTE(.);
+    __ULIBC_TEXT_START = ABSOLUTE(.);
+    *(.ulibc.text)
+    *(.ulibc.text.*)
+    __ULIBC_TEXT_END = ABSOLUTE(.);
+    __MULTIKERNEL_TEXT_START = ABSOLUTE(.);
+    *(.multikernel.text)
+    *(.multikernel.text.*)
+    __MULTIKERNEL_TEXT_END = ABSOLUTE(.);
+    __LIBMPI_TEXT_START = ABSOLUTE(.);
+    *(.libmpi.text)
+    *(.libmpi.text.*)
+    __LIBMPI_TEXT_END = ABSOLUTE(.);
+    *(.text)
+    *(.text.*)
+    __TEXT_END = ABSOLUTE(.);
+    __text_end = ABSOLUTE(.);
+    __KERNEL_TEXT_END = ABSOLUTE(.);
+    . = ALIGN(8);
+  }
 
-  .stack   ALIGN(0x1000) :  AT ( ALIGN( LOADADDR(.text) + SIZEOF(.text) , 0x1000))
+  .stack   ALIGN(0x1000) :  AT ( ALIGN( LOADADDR(.kernel_text) + SIZEOF(.kernel_text) , 0x1000))
   {
       __user_stack_begin = ABSOLUTE(.);
       _user_stack_end     = ABSOLUTE(.);
@@ -85,15 +115,43 @@
   }
 
   /* This is the value of the GP base */
-  .rodata   ALIGN(0x1000) :  AT ( ALIGN( LOADADDR(.stack) + SIZEOF(.stack), 0x1000))  {
-	__rodata_begin = ABSOLUTE(.);
+  .kernel_rodata   ALIGN(0x1000) :  AT ( ALIGN( LOADADDR(.stack) + SIZEOF(.stack), 0x1000))  {
+  __rodata_begin = ABSOLUTE(.);
     KEEP(*crtbegin.o(.ctors))
     KEEP(*crtbegin.?(.ctors))
     KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o $OTHER_EXCLUDE_FILES) .ctors))
     KEEP (*(SORT(.ctors.*)))
     KEEP (*(.ctors))
-    *(.rodata.*)
+    __BARELIB_RODATA_START = ABSOLUTE(.);
+    *(.barelib.rodata)
+    *(.barelib.rodata.*)
+    __BARELIB_RODATA_END = ABSOLUTE(.);
+    __HAL_RODATA_START = ABSOLUTE(.);
+    *(.hal.rodata)
+    *(.hal.rodata.*)
+    __HAL_RODATA_END = ABSOLUTE(.);
+    __MICROKERNEL_RODATA_START = ABSOLUTE(.);
+    *(.microkernel.rodata)
+    *(.microkernel.rodata.*)
+    __MICROKERNEL_RODATA_END = ABSOLUTE(.);
+    __LIBNANVIX_RODATA_START = ABSOLUTE(.);
+    *(.libnanvix.rodata)
+    *(.libnanvix.rodata.*)
+    __LIBNANVIX_RODATA_END = ABSOLUTE(.);
+    __ULIBC_RODATA_START = ABSOLUTE(.);
+    *(.ulibc.rodata)
+    *(.ulibc.rodata.*)
+    __ULIBX_RODATA_END = ABSOLUTE(.);
+    __MULTIKERNEL_RODATA_START = ABSOLUTE(.);
+    *(.multikernel.rodata)
+    *(.multikernel.rodata.*)
+    __MULTIKERNEL_RODATA_END = ABSOLUTE(.);
+    __LIBMPI_RODATA_START = ABSOLUTE(.);
+    *(.libmpi.rodata)
+    *(.libmpi.rodata.*)
+    __LIBMPI_RODATA_END = ABSOLUTE(.);
     *(.rodata)
+    *(.rodata.*)
     *(.csp_caps)
     *(.locked.rodata.*)
     *(.locked.rodata)
@@ -109,12 +167,12 @@
     *(.gcc_except_table)
     *(.gcc_except_table.*)
     . = ALIGN(0x1000);
-	__rodata_end = ABSOLUTE(.);
+  __rodata_end = ABSOLUTE(.);
   } =0x12345678
 
-  .locked_data ALIGN(0x1000) : AT ( ALIGN( LOADADDR(.rodata) + SIZEOF(.rodata), 0x1000))
+  .locked_data ALIGN(0x1000) : AT ( ALIGN( LOADADDR(.kernel_rodata) + SIZEOF(.kernel_rodata), 0x1000))
   {
-	__data_begin = ABSOLUTE(.);
+  __data_begin = ABSOLUTE(.);
     _locked_data_start = ABSOLUTE(.);
     *(.locked.locked_data) /* trap handlers */
     *(.locked.lowmem_data) /* trap handlers */
@@ -134,9 +192,9 @@
 
   .bsp_config ALIGN(0x8) : AT ( ALIGN( LOADADDR(.locked_data) + SIZEOF(.locked_data), 0x8))
   {
-	  *(.locked.bsp_config_desc)
-	  *(.bsp_config_desc)
-	  *(.bsp_config)
+    *(.locked.bsp_config_desc)
+    *(.bsp_config_desc)
+    *(.bsp_config)
   }
 
   MPPA_ARGAREA_SIZE  = 0x1000;
@@ -206,32 +264,127 @@
     *(.rela.plt)
   }
 
-  .data   ALIGN(0x8) :  AT ( ALIGN( LOADADDR(.rela.plt) + SIZEOF(.rela.plt), 0x8))
+  .kernel_data   ALIGN(0x8) :  AT ( ALIGN( LOADADDR(.rela.plt) + SIZEOF(.rela.plt), 0x8))
   {
     _data_start = ABSOLUTE(.);
-	__DATA_START = ABSOLUTE(.);
-		*(.data)
-	__DATA_END = ABSOLUTE(.);
-    *(.tls_start*)
+  __DATA_START = ABSOLUTE(.);
+  __BARELIB_DATA_START = ABSOLUTE(.);
+    *(.barelib.data)
+    *(.barelib.data.*)
+    __BARELIB_DATA_END = ABSOLUTE(.);
+  __HAL_DATA_START = ABSOLUTE(.);
+    *(.hal.data)
+    *(.hal.data.*)
+  __HAL_DATA_END = ABSOLUTE(.);
+  __MICROKERNEL_DATA_START = ABSOLUTE(.);
+    *(.microkernel.data)
+    *(.microkernel.data.*)
+  __MICROKERNEL_DATA_END = ABSOLUTE(.);
+  __LIBNANVIX_DATA_START = ABSOLUTE(.);
+    *(.libnanvix.data)
+    *(.libnanvix.data.*)
+  __LIBNANVIX_DATA_END = ABSOLUTE(.);
+  __ULIBC_DATA_START = ABSOLUTE(.);
+    *(.ulibc.data)
+    *(.ulibc.data.*)
+  __ULIBC_DATA_END = ABSOLUTE(.);
+  __MULTIKERNEL_DATA_START = ABSOLUTE(.);
+    *(.multikernel.data)
+    *(.multikernel.data.*)
+  __MULTIKERNEL_DATA_END = ABSOLUTE(.);
+  __LIBMPI_DATA_START = ABSOLUTE(.);
+    *(.libmpi.data)
+    *(.libmpi.data.*)
+  __LIBMPI_DATA_END = ABSOLUTE(.);
+    *(.data)
     *(.data.*)
+    *(.tls_start*)
+  __DATA_END = ABSOLUTE(.);
     *(.gnu.linkonce.d.*)
     *(COMMON)
     . = ALIGN(0x20);
   }  =0x12345678
 
-  .bss   ALIGN(0x20) :  AT ( ALIGN( LOADADDR(.data) + SIZEOF(.data), 0x20))
+  .kernel_bss   ALIGN(0x20) :  AT ( ALIGN( LOADADDR(.kernel_data) + SIZEOF(.kernel_data), 0x20))
   {
     _bss_start = ABSOLUTE(.);
-		__BSS_START = ABSOLUTE(.);
-			*(.bss)
-		__BSS_END = ABSOLUTE(.);
-		*(.bss.*)
-		*(.dynbss)
-		*(.dynbss.*)
-		*(.gnu.linkonce.b.*)
-		. = ALIGN(0x20);
+    __BSS_START = ABSOLUTE(.);
+    __BARELIB_BSS_START = ABSOLUTE(.);
+    *(.barelib.bss)
+    *(.barelib.bss.*)
+    __BARELIB_BSS_END = ABSOLUTE(.);
+    __HAL_BSS_START = ABSOLUTE(.);
+    *(.hal.bss)
+    *(.hal.bss.*)
+    __HAL_BSS_END = ABSOLUTE(.);
+    __MICROKERNEL_BSS_START = ABSOLUTE(.);
+    *(.microkernel.bss)
+    *(.microkernel.bss.*)
+    __MICROKERNEL_BSS_END = ABSOLUTE(.);
+    __LIBNANVIX_BSS_START = ABSOLUTE(.);
+    *(.libnanvix.bss)
+    *(.libnanvix.bss.*)
+    __LIBANANVIX_BSS_END = ABSOLUTE(.);
+    __ULIBC_BSS_START = ABSOLUTE(.);
+    *(.ulibc.bss)
+    *(.ulibc.bss.*)
+    __ULIBC_BSS_END = ABSOLUTE(.);
+    __MULTIKERNEL_BSS_START = ABSOLUTE(.);
+    *(.multikernel.bss)
+    *(.multikernel.bss.*)
+    __MULTIKERNEL_BSS_END = ABSOLUTE(.);
+    __LIBMPI_BSS_START = ABSOLUTE(.);
+    *(.libmpi.bss)
+    *(.libmpi.bss.*)
+    __LIBMPI_BSS_END = ABSOLUTE(.);
+    *(.bss)
+    *(.bss.*)
+    __BSS_END = ABSOLUTE(.);
+    *(.dynbss)
+    *(.dynbss.*)
+    *(.gnu.linkonce.b.*)
+    . = ALIGN(0x4096);
     _bss_end = ABSOLUTE(.);
   } =0x12345678
+
+  .text  ALIGN(0x100) : AT ( ALIGN( LOADADDR(.kernel_bss) + SIZEOF(.kernel_bss), 0x100))
+  {
+    __USER_START = ABSOLUTE(.);
+    __USER_TEXT_START = ABSOLUTE(.);
+    *(.user.text)
+    *(.user.text.*)
+    __USER_TEXT_END = ABSOLUTE(.);
+    __TEXT_END = ABSOLUTE(.);
+    . = ALIGN(0x1000);
+  }
+
+  .rodata ALIGN(0x1000) :  AT ( ALIGN( LOADADDR(.text) + SIZEOF(.text), 0x1000))
+  {
+    __USER_RODATA_START = ABSOLUTE(.);
+    *(.user.rodata)
+    *(.user.rodata.*)
+    __USER_RODATA_END = ABSOLUTE(.);
+    . = ALIGN(0x8);
+  }
+
+  .data   ALIGN(0x8) :  AT ( ALIGN( LOADADDR(.rodata) + SIZEOF(.rodata), 0x8))
+  {
+    __USER_DATA_START = ABSOLUTE(.);
+    *(.user.data)
+    *(.user.data.*)
+    __USER_DATA_END = ABSOLUTE(.);
+    . = ALIGN(0x20);
+  }
+
+  .bss   ALIGN(0x20) :  AT ( ALIGN( LOADADDR(.data) + SIZEOF(.data), 0x20))
+  {
+    __USER_BSS_START = ABSOLUTE(.);
+    *(.user.bss)
+    *(.user.bss.*)
+    __USER_BSS_END = ABSOLUTE(.);
+    __USER_END = ABSOLUTE(.);
+    . = ALIGN(8);
+  }
 
   /* TLS support */
   .tdata   ALIGN(8) : AT ( ALIGN( LOADADDR(.bss) + SIZEOF(.bss), 8 ))
@@ -261,4 +414,3 @@
   _tbss_size = _tbss_end - _tbss_start;
 
   _tls_size = _tbss_size + _tdata_size;
-

@@ -46,6 +46,8 @@ export TOOLCHAIN_DIR ?= /usr/local/k1tools
 export CC := $(TOOLCHAIN_DIR)/bin/k1-gcc
 export LD := $(TOOLCHAIN_DIR)/bin/k1-gcc
 export AR := $(TOOLCHAIN_DIR)/bin/k1-ar
+export OBJCOPY := $(TOOLCHAIN_DIR)/bin/k1-objcopy
+export OBJDUMP := $(TOOLCHAIN_DIR)/bin/k1-objdump
 
 # Timeout Variable
 export TIMEOUT ?= 600

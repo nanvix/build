@@ -22,6 +22,8 @@
 # SOFTWARE.
 #
 
+export LIBNAME=libnanvix
+
 # Builds contrib.
 contrib: contrib-microkernel
 
