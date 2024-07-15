@@ -52,8 +52,8 @@ image: all
 
 # Runs system in release mode.
 run: image
-	bash $(SCRIPTS_DIR)/run.sh $(TARGET) $(IMAGE) --no-debug $(TIMEOUT)
+	bash $(SCRIPTS_DIR)/run.sh $(TARGET) $(MACHINE) $(IMAGE) --no-debug $(TIMEOUT)
 
 # Runs system in debug mode.
 debug: image
-	bash $(SCRIPTS_DIR)/run.sh $(TARGET) $(IMAGE) --debug $(TIMEOUT)
+	bash $(SCRIPTS_DIR)/run.sh $(TARGET) $(MACHINE) $(IMAGE) --debug $(TIMEOUT)

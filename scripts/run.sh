@@ -3,9 +3,10 @@
 
 # Script Arguments
 TARGET=$1   # Target
-IMAGE=$2    # Image
-MODE=$3     # Run Mode
-TIMEOUT=$4  # Timeout
+MACHINE=$2  # Machine
+IMAGE=$3    # Image
+MODE=$4     # Run Mode
+TIMEOUT=$5  # Timeout
 
 # Global Variables
 export SCRIPT_NAME=$0
@@ -47,9 +48,10 @@ function check_args
 function run_qemu
 {
 	local target=$1     # Target architecture.
-	local image=$2      # Image.
-	local mode=$3       # Spawn mode (run or debug).
-	local timeout=$4    # Timeout for test mode.
+	local machine=$2    # Machine.
+	local image=$3      # Image.
+	local mode=$4       # Spawn mode (run or debug).
+	local timeout=$5    # Timeout for test mode.
 	local GDB_PORT=1234 # GDB port used for debugging.
 	local cmd=""
 
@@ -57,7 +59,18 @@ function run_qemu
 	local MEMSIZE=256M # Memory Size
 
 	if [ $target == "i386" ]; then
-		machine="-machine pc"
+		case "$machine" in
+			"pc")
+				machine="-machine pc"
+				;;
+			"isapc")
+				machine="-machine isapc"
+				;;
+			*)
+				echo "Unsupported machine: $MACHINE"
+				exit 1
+				;;
+		esac
 	fi
 
 	qemu_cmd="$TOOLCHAIN_DIR/qemu/bin/qemu-system-$target
@@ -100,6 +113,7 @@ if [[ ! -z $VERBOSE ]];
 then
 	echo "====================================================================="
 	echo "TARGET      = $TARGET"
+	echo "MACHINE     = $MACHINE"
 	echo "SCRIPT_DIR  = $SCRIPT_DIR"
 	echo "SCRIPT_NAME = $SCRIPT_NAME"
 	echo "IMAGE       = $IMAGE"
@@ -110,7 +124,7 @@ fi
 
 case "$TARGET" in
 	"x86")
-		run_qemu "i386" $IMAGE $MODE $TIMEOUT
+		run_qemu "i386" $MACHINE $IMAGE $MODE $TIMEOUT
 		;;
     *)
         echo "Unsupported target: $TARGET"
