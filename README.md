@@ -6,7 +6,7 @@ This repository hosts the build system of the Nanvix operating system.
 
 > Learn more about Nanvix at [https://github.com/nanvix](https://github.com/nanvix).
 
-## How is this repository organized?
+## How Is This Repository Organized?
 
 - [`iso/`](iso) - System image receipts.
 - [`kernel/`](kernel) - Build system for the kernel.
