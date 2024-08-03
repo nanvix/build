@@ -6,6 +6,14 @@ This repository hosts the build system of the Nanvix operating system.
 
 > Learn more about Nanvix at [https://github.com/nanvix](https://github.com/nanvix).
 
+## How is this repository organized?
+
+- [`iso/`](iso) - System image receipts.
+- [`scripts/`](scripts) - Auxiliary build scripts.
+- [`kernel/`](kernel) - Build system for the kernel.
+- [`libs/`](libs) - Build system for libraries.
+- [`user/`](user) - Build system for system daemons and user applications.
+
 ## Usage Statement
 
 This project is a prototype. As such, we provide no guarantees that it will work and you are assuming any risks with using the code. We welcome comments and feedback. Please send any questions or comments to any [maintainer of the project](https://github.com/orgs/nanvix/people).
