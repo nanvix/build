@@ -12,6 +12,7 @@ This repository hosts the build system of the Nanvix operating system.
 - [`scripts/`](scripts) - Auxiliary build scripts.
 - [`kernel/`](kernel) - Build system for the kernel.
 - [`libs/`](libs) - Build system for libraries.
+- [`rust/`](rust) - Config files for Rust and Cargo.
 - [`user/`](user) - Build system for system daemons and user applications.
 
 ## Join the Community
