@@ -9,10 +9,11 @@ This repository hosts the build system of the Nanvix operating system.
 ## How is this repository organized?
 
 - [`iso/`](iso) - System image receipts.
-- [`scripts/`](scripts) - Auxiliary build scripts.
 - [`kernel/`](kernel) - Build system for the kernel.
 - [`libs/`](libs) - Build system for libraries.
-- [`rust/`](rust) - Config files for Rust and Cargo.
+- [`mk`](mk) - Configuration files for Make, common to all build systems.
+- [`rust/`](rust) - Configuration files for Rust and Cargo, common to all build systems.
+- [`scripts/`](scripts) - Auxiliary build scripts.
 - [`user/`](user) - Build system for system daemons and user applications.
 
 ## Join the Community
