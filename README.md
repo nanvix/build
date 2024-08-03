@@ -14,6 +14,10 @@ This repository hosts the build system of the Nanvix operating system.
 - [`libs/`](libs) - Build system for libraries.
 - [`user/`](user) - Build system for system daemons and user applications.
 
+## Join the Community
+
+We use [Slack](https://join.slack.com/t/nanvix/shared_invite/zt-1yu30bs28-nsNmw8IwCyh6MBBV~B~X7w) as our main communication channel. Join us there!
+
 ## Usage Statement
 
 This project is a prototype. As such, we provide no guarantees that it will work and you are assuming any risks with using the code. We welcome comments and feedback. Please send any questions or comments to any [maintainer of the project](https://github.com/orgs/nanvix/people).
