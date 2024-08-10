@@ -81,12 +81,12 @@ function run_qemu
 			-m $MEMSIZE
 			-mem-prealloc"
 
-	cmd="$qemu_cmd -gdb tcp::$GDB_PORT"
-	cmd="$cmd -cdrom $image"
+	cmd="$qemu_cmd -cdrom $image"
 
 	# Run.
 	if [ $mode == "--debug" ];
 	then
+		cmd="$cmd -gdb tcp::$GDB_PORT"
 		cmd="$cmd -S"
 		$cmd
 	else
