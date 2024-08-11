@@ -28,7 +28,7 @@ endif
 
 # Cargo Options
 ifeq ($(RELEASE), yes)
-export CARGO_FLAGS += --release
+export CARGO_FLAGS := --release
 endif
 
 # File format for executables.
