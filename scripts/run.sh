@@ -60,11 +60,17 @@ function run_qemu
 
 	if [ $target == "i386" ]; then
 		case "$machine" in
+		 	"baremetal")
+				machine="-machine pc"
+				stdout="-serial stdio"
+				;;
 			"pc")
 				machine="-machine pc"
+				stdout="-debugcon stdio"
 				;;
 			"isapc")
 				machine="-machine isapc"
+				stdout="-debugcon stdio"
 				;;
 			*)
 				echo "Unsupported machine: $MACHINE"
@@ -75,7 +81,7 @@ function run_qemu
 
 	qemu_cmd="$TOOLCHAIN_DIR/qemu/bin/qemu-system-$target
 	  		$machine
-			-serial stdio
+			$stdout
 			-display none
 			-cpu pentium2
 			-m $MEMSIZE
