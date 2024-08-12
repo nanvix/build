@@ -7,7 +7,7 @@
  * Imported Symbols                                                           *
  *============================================================================*/
 
-.extern main
+.extern _start
 
 /*============================================================================*
  * Exported Symbols                                                           *
@@ -23,5 +23,5 @@
 
 _do_start:
     movl %esp, %ebp
-    call main
+    call _start
 1:  jmp 1b
