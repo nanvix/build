@@ -16,8 +16,21 @@ PAGE_SIZE = 0x1000;
  */
 BOOT_ADDR = 0x00100000;
 
+/*
+ * Trampoline Address
+ */
+TRAMPOLINE_ADDR = 0x00008000;
+
 SECTIONS
 {
+	. = TRAMPOLINE_ADDR;
+
+    /* Trampoline section. */
+    .trampoline :
+    {
+    	KEEP(*(.trampoline))
+    }
+
 	. = BOOT_ADDR;
 
 	__KERNEL_START = .;
@@ -27,7 +40,7 @@ SECTIONS
 	.bootstrap :
 	{
 		__BOOTSTRAP_START = .;
-		*(.bootstrap)
+		KEEP(*(.bootstrap))
 		__BOOTSTRAP_END = .;
 	}
 
