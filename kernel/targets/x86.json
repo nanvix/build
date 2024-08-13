@@ -19,6 +19,7 @@
 	},
 	"post-link-args": {
 		"gnu-cc": [
+			"src/hal/arch/x86/start16.x86.o",
 			"src/hal/arch/x86/start.x86.o",
 			"src/hal/arch/x86/hooks.x86.o"
 		]
