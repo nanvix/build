@@ -63,14 +63,27 @@ function run_qemu
 		 	"baremetal")
 				machine="-machine pc"
 				stdout="-serial stdio"
+				smp=""
+				;;
+			"baremetal-smp")
+				machine="-machine pc"
+				stdout="-serial stdio"
+				smp="-smp 2"
 				;;
 			"pc")
 				machine="-machine pc"
 				stdout="-debugcon stdio"
+				smp=""
+				;;
+			"pc-smp")
+				machine="-machine pc"
+				stdout="-debugcon stdio"
+				smp="-smp 2"
 				;;
 			"isapc")
 				machine="-machine isapc"
 				stdout="-debugcon stdio"
+				smp=""
 				;;
 			*)
 				echo "Unsupported machine: $MACHINE"
@@ -82,6 +95,7 @@ function run_qemu
 	qemu_cmd="$TOOLCHAIN_DIR/qemu/bin/qemu-system-$target
 	  		$machine
 			$stdout
+			$smp
 			-display none
 			-cpu pentium2
 			-m $MEMSIZE
@@ -92,8 +106,7 @@ function run_qemu
 	# Run.
 	if [ $mode == "--debug" ];
 	then
-		cmd="$cmd -gdb tcp::$GDB_PORT"
-		cmd="$cmd -S"
+		cmd="$cmd -gdb tcp::$GDB_PORT -S"
 		$cmd
 	else
 
