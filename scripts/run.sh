@@ -60,27 +60,27 @@ function run_qemu
 
 	if [ $target == "i386" ]; then
 		case "$machine" in
-		 	"baremetal")
+		 	"qemu-baremetal")
 				machine="-machine pc"
 				stdout="-serial stdio"
 				smp=""
 				;;
-			"baremetal-smp")
+			"qemu-baremetal-smp")
 				machine="-machine pc"
 				stdout="-serial stdio"
 				smp="-smp 2"
 				;;
-			"pc")
+			"qemu-pc")
 				machine="-machine pc"
 				stdout="-debugcon stdio"
 				smp=""
 				;;
-			"pc-smp")
+			"qemu-pc-smp")
 				machine="-machine pc"
 				stdout="-debugcon stdio"
 				smp="-smp 2"
 				;;
-			"isapc")
+			"qemu-isapc")
 				machine="-machine isapc"
 				stdout="-debugcon stdio"
 				smp=""
