@@ -58,39 +58,43 @@ function run_qemu
 	# Target configuration.
 	local MEMSIZE=256M # Memory Size
 
-	if [ $target == "i386" ]; then
-		case "$machine" in
-		 	"qemu-baremetal")
-				machine="-machine pc"
-				stdout="-serial stdio"
-				smp=""
-				;;
-			"qemu-baremetal-smp")
-				machine="-machine pc"
-				stdout="-serial stdio"
-				smp="-smp 2"
-				;;
-			"qemu-pc")
-				machine="-machine pc"
-				stdout="-debugcon stdio"
-				smp=""
-				;;
-			"qemu-pc-smp")
-				machine="-machine pc"
-				stdout="-debugcon stdio"
-				smp="-smp 2"
-				;;
-			"qemu-isapc")
-				machine="-machine isapc"
-				stdout="-debugcon stdio"
-				smp=""
-				;;
-			*)
-				echo "Unsupported machine: $MACHINE"
-				exit 1
-				;;
-		esac
+	# Check if the target is unsupported.
+	if [ $target != "i386" ]; then
+		echo "Unsupported target: $target"
+		exit 1
 	fi
+
+	case "$machine" in
+		"qemu-baremetal")
+			machine="-machine pc"
+			stdout="-serial stdio"
+			smp=""
+			;;
+		"qemu-baremetal-smp")
+			machine="-machine pc"
+			stdout="-serial stdio"
+			smp="-smp 2"
+			;;
+		"qemu-pc")
+			machine="-machine pc"
+			stdout="-debugcon stdio"
+			smp=""
+			;;
+		"qemu-pc-smp")
+			machine="-machine pc"
+			stdout="-debugcon stdio"
+			smp="-smp 2"
+			;;
+		"qemu-isapc")
+			machine="-machine isapc"
+			stdout="-debugcon stdio"
+			smp=""
+			;;
+		*)
+			echo "Unsupported machine: $MACHINE"
+			exit 1
+			;;
+	esac
 
 	qemu_cmd="$TOOLCHAIN_DIR/qemu/bin/qemu-system-$target
 	  		$machine
@@ -143,7 +147,15 @@ fi
 
 case "$TARGET" in
 	"x86")
-		run_qemu "i386" $MACHINE $IMAGE $MODE $TIMEOUT
+		case "$MACHINE" in
+			"qemu-baremetal" | "qemu-baremetal-smp" | "qemu-pc" | "qemu-pc-smp" | "qemu-isapc")
+				check_args
+				run_qemu "i386" $MACHINE $IMAGE $MODE $TIMEOUT
+				;;
+			*)
+				echo "Unsupported machine: $MACHINE"
+				;;
+		esac
 		;;
     *)
         echo "Unsupported target: $TARGET"
