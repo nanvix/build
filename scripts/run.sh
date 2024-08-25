@@ -21,7 +21,7 @@ export SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && p
 #
 function usage
 {
-	echo "$SCRIPT_NAME <binary> [mode] [timeout]"
+	echo "$SCRIPT_NAME <target> <machine> <image> [mode] [timeout]"
 	exit 1
 }
 
