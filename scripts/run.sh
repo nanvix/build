@@ -125,6 +125,33 @@ function run_qemu
 
 #===================================================================================================
 
+# Runs a binary in MicroVm.
+function run_microvm()
+{
+	local image=$1   # Image.
+	local timeout=$2 # Timeout for test mode.
+
+	# Base command.
+	local cmd="$TOOLCHAIN_DIR/microvm/bin/microvm"
+
+	# Machine configuration.
+	local MEMSIZE=256M # Memory Size
+
+	cmd="$cmd -kernel $image -memory $MEMSIZE"
+
+	# Run.
+	if [ ! -z $timeout ];
+	then
+		cmd="timeout -s SIGINT --preserve-status --foreground $timeout sudo -E $cmd"
+	fi
+
+	echo "Running: $cmd"
+
+	$cmd
+}
+
+#===================================================================================================
+
 # No debug mode.
 if [ -z $MODE ];
 then
@@ -147,10 +174,13 @@ fi
 
 case "$TARGET" in
 	"x86")
+		check_args
 		case "$MACHINE" in
 			"qemu-baremetal" | "qemu-baremetal-smp" | "qemu-pc" | "qemu-pc-smp" | "qemu-isapc")
-				check_args
 				run_qemu "i386" $MACHINE $IMAGE $MODE $TIMEOUT
+				;;
+			"microvm")
+				run_microvm $IMAGE $TIMEOUT
 				;;
 			*)
 				echo "Unsupported machine: $MACHINE"

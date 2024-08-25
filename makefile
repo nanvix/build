@@ -40,8 +40,10 @@ export EXEC_FORMAT := elf
 
 # Builds the system image.
 image: all
+ifeq ($(IMAGE), $(filter %.iso, $(IMAGE)))
 	@cp -f $(BINARIES_DIR)/*.$(EXEC_FORMAT) $(IMAGE_DIR)/
 	@grub-mkrescue  $(IMAGE_DIR) -o $(IMAGE)
+endif
 
 # Runs system in release mode.
 run: image
