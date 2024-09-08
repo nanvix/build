@@ -17,13 +17,6 @@
 			"--entry=_do_start"
 		]
 	},
-	"post-link-args": {
-		"gnu-cc": [
-			"src/hal/arch/x86/start16.x86.o",
-			"src/hal/arch/x86/start.x86.o",
-			"src/hal/arch/x86/hooks.x86.o"
-		]
-	},
 	"executables": true,
 	"code-model": "small",
 	"exe-suffix": ".elf",
