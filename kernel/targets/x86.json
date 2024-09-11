@@ -15,7 +15,10 @@
 			"-Tbuild/kernel/linker/x86/kernel.ld",
 			"-nostdlib",
 			"--entry=_do_start",
-			"-melf_i386"
+			"-melf_i386",
+			"--whole-archive",
+			"-lkernel",
+			"--no-whole-archive"
 		]
 	},
 	"executables": true,
