@@ -15,12 +15,10 @@
 			"-Tbuild/user/linker/x86/user.ld",
 			"-nostdlib",
 			"--entry=_do_start",
-			"-melf_i386"
-		]
-	},
-	"post-link-args": {
-		"ld": [
-			"build/user/crt/x86/crt0.x86.o"
+			"-melf_i386",
+			"--whole-archive",
+			"-luser",
+			"--no-whole-archive"
 		]
 	},
 	"executables": true,
