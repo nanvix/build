@@ -96,7 +96,15 @@ function run_qemu
 			;;
 	esac
 
-	qemu_cmd="$TOOLCHAIN_DIR/qemu/bin/qemu-system-$target
+	# Select QEMU from path, if available.
+	if [ ! -z $(command -v qemu-system-$target) ];
+	then
+		qemu_cmd="qemu-system-$target"
+	else
+		qemu_cmd="$TOOLCHAIN_DIR/qemu/bin/qemu-system-$target"
+	fi
+
+	qemu_cmd="$qemu_cmd
 	  		$machine
 			$stdout
 			$smp
@@ -132,7 +140,7 @@ function run_microvm()
 	local timeout=$2 # Timeout for test mode.
 
 	# Base command.
-	local cmd="$TOOLCHAIN_DIR/microvm/bin/microvm"
+	local cmd="$MICROVM_PATH/microvm.elf"
 
 	# Machine configuration.
 	local MEMSIZE=256M # Memory Size

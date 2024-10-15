@@ -24,5 +24,6 @@ apt-get install -y   \
     ninja-build      \
     pkg-config       \
     python3-venv     \
+    qemu-system-x86  \
     texinfo          \
     xorriso          \
