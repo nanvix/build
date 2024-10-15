@@ -140,7 +140,7 @@ function run_microvm()
 	local timeout=$2 # Timeout for test mode.
 
 	# Base command.
-	local cmd="$TOOLCHAIN_DIR/microvm/bin/microvm"
+	local cmd="$MICROVM_PATH/microvm.elf"
 
 	# Machine configuration.
 	local MEMSIZE=256M # Memory Size
